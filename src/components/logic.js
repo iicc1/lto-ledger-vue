@@ -1,28 +1,24 @@
 import AsyncLock from 'async-lock'
 import TransportU2F from '@ledgerhq/hw-transport-u2f'
 import { WavesLedger } from '@waves/ledger'
-// import BigNumber from 'bignumber.js'
 
-const LOCK = 'LedgerDevice'
+const LOCK = 'LedgerDevice';
 
 class LedgerDevice {
   constructor () {
     this.lock = new AsyncLock()
   }
 
-  async getAddressInfo (userId, networkCode = 76) {
+  async getAddressInfo (userId, networkCode = 76 /*lto network mainnet code*/) {
     return this._safeExec(
       async () => {
-        // const transport = await TransportU2F.create()
         const app = new WavesLedger({
           transport: TransportU2F,
           exchangeTimeout: 10000,
           networkCode,
           debug: false
-        })
-        const data = await app.getUserDataById(userId)
-        // eslint-disable-next-line
-        // console.log('data', data)
+        });
+        const data = await app.getUserDataById(userId);
         return data
       }
     )
