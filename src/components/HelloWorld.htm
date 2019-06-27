@@ -1,0 +1,15 @@
+<div class="hello">
+  <div>
+    <div><b>User ID:</b></div>
+    <div><input type="text" v-model="userId" @input="handleReset" /></div>
+  </div>
+  <div v-if="userInfo">
+    <div><b>User Info:</b></div>
+    <div>
+      <pre>{{userInfo}}</pre>
+    </div>
+  </div>
+  <div>
+    <button @click="handleConnect">Connect</button>
+  </div>
+</div>
