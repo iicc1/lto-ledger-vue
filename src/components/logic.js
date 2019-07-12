@@ -1,6 +1,7 @@
 import AsyncLock from 'async-lock'
 import TransportU2F from '@ledgerhq/hw-transport-u2f'
 import { WavesLedger } from '@waves/ledger'
+import Steps from "./Steps";
 
 const LOCK = 'LedgerDevice';
 
@@ -35,6 +36,7 @@ class LedgerDevice {
 const device = new LedgerDevice()
 
 export default {
+  components : {  Steps },
   data () {
     return {
       userId: 0,

@@ -1,24 +1,18 @@
 <template>
-    <div class="hello">
-        <div>
-            <div>
-                <b>User ID:</b>
-            </div>
-            <div>
-                <label>
-                    <input type="text" v-model="userId" @input="handleReset" />
-                </label>
-            </div>
-        </div>
-        <div v-if="userInfo">
-            <div><b>User Info:</b></div>
-            <div>
-                <pre>{{userInfo}}</pre>
+    <div>
+    <section class="hero is-primary is-medium">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    LTO Network
+                </h1>
+                <h2 class="subtitle">
+                    Ledger Wallet Interface
+                </h2>
             </div>
         </div>
-        <div>
-            <button @click="handleConnect">Connect</button>
-        </div>
+    </section>
+    <steps></steps>
     </div>
 </template>
 
