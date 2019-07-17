@@ -12,12 +12,20 @@
             </div>
         </div>
     </section>
-    <steps></steps>
+        <div class="container">
+            <div class="notification">
+                <Panel></Panel>
+            </div>
+        </div>
+
     </div>
 </template>
 
-<script src="./logic.js">
-
+<script>
+    import Panel from "./Panel";
+    export default {
+        components: {Panel}
+    }
 </script>
 
 <style scoped >

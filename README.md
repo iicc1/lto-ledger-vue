@@ -16,5 +16,5 @@ Before getting started you would need:
 ## Getting Started - Local Development
 
 1. To deploy the local project use `yarn serve`
-1. Running `yarn serve` will deploy the project in localhost. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+1. Running `yarn serve` will deploy the project in localhost. Navigate to `http://localhost:8080/`. The app will automatically reload if you change any of the source files.
 1. In case you need to create a production build run `yarn build`

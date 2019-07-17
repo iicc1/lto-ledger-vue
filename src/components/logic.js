@@ -1,55 +1,55 @@
 import AsyncLock from 'async-lock'
 import TransportU2F from '@ledgerhq/hw-transport-u2f'
-import { WavesLedger } from '@waves/ledger'
-import Steps from "./Steps";
+import {WavesLedger} from '@waves/ledger'
 
 const LOCK = 'LedgerDevice';
 
 class LedgerDevice {
-  constructor () {
-    this.lock = new AsyncLock()
-  }
+    constructor () {
+        this.lock = new AsyncLock()
+    }
 
-  async getAddressInfo (userId, networkCode = 76 /*lto network mainnet code*/) {
-    return this._safeExec(
-      async () => {
-        const app = new WavesLedger({
-          transport: TransportU2F,
-          exchangeTimeout: 10000,
-          networkCode,
-          debug: false
-        });
-        const data = await app.getUserDataById(userId);
-        return data
-      }
-    )
-  }
+    async getAddressInfo (userId, networkCode = 76) {
+        return this._safeExec(
+            async () => {
+                const app = new WavesLedger({
+                    transport: TransportU2F,
+                    exchangeTimeout: 10000,
+                    networkCode,
+                    debug: true
+                });
+                return await app.getUserDataById(userId)
+            }
+        )
+    }
 
-  async _safeExec (callable) {
-    return this.lock.acquire(
-      LOCK,
-      callable
-    )
-  }
+    async _safeExec (callable) {
+        return this.lock.acquire(
+            LOCK,
+            callable
+        )
+    }
 }
 
-const device = new LedgerDevice()
+const device = new LedgerDevice();
 
 export default {
-  components : {  Steps },
-  data () {
-    return {
-      userId: 0,
-      userInfo: null
-    }
-  },
-  methods: {
-    async handleReset () {
-      this.userInfo = null
+    name: 'Panel',
+    data() {
+        return {
+            userId: 1,
+            userInfo: null,
+            selectedOptions: []
+        }
     },
-    async handleConnect () {
-      // this.userInfo =
-      this.userInfo = await device.getAddressInfo(this.userId, 76 /*lto network mainnet code*/)
+    methods: {
+        async handleReset() {
+            this.userInfo = null
+        },
+        async handleConnect() {
+            // eslint-disable-next-line
+            console.log("test");
+            this.userInfo = await device.getAddressInfo(this.userId, 76)
+        }
     }
-  }
 }
