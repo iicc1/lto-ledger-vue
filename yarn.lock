@@ -759,7 +759,7 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-4.66.0.tgz#a8d9cc6e2ceff340e528455aee8a2632979821f9"
   integrity sha512-TVgt6VDPaJCLKGx3qhGf4KQ5TEsGOMwUTUnZYy68IpqgUmPxbxevZ+OeF5G2Ns8D3/FZvKx9uQFWjA40B0R5qQ==
 
-"@ledgerhq/hw-transport-u2f@^4.15.0", "@ledgerhq/hw-transport-u2f@^4.63.2":
+"@ledgerhq/hw-transport-u2f@^4.63.2":
   version "4.66.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-u2f/-/hw-transport-u2f-4.66.0.tgz#3bde6e2af1d7ba00261dad5b39845fa9c613af82"
   integrity sha512-XG0WJKcSxg85qw4X2Gtu892XNn3aydvmRwSHB330vbwej00bV8Fy5ko41wicXyVTv9tXGQa7tWkH3dbEbPH5PQ==
@@ -783,6 +783,16 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/logs/-/logs-4.64.0.tgz#19a335e3f2d9188188437f8dabb06e0fd45b0052"
   integrity sha512-NwgA7q1CXWMkqxoHVaSTk0gJUGbiBbWTM7Uod/Zz8EWNa1Ns0yHthCcSS279htP6oQplEaSppzsie5bcbwNApg==
 
+"@lto-network/lto-marshall@legalthings/lto-marshall":
+  version "1.0.0"
+  resolved "https://codeload.github.com/legalthings/lto-marshall/tar.gz/6693c68d53ff51f9ab3dac07384ceab504158a9e"
+  dependencies:
+    "@types/base64-js" "^1.2.5"
+    "@types/long" "^4.0.0"
+    base64-js "^1.3.0"
+    long "^4.0.0"
+    parse-json-bignumber "^0.1.3"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -805,6 +815,11 @@
     error-stack-parser "^2.0.0"
     string-width "^2.0.0"
 
+"@types/base64-js@^1.2.5":
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@types/base64-js/-/base64-js-1.2.5.tgz#582b2476169a6cba460a214d476c744441d873d5"
+  integrity sha1-WCskdhaabLpGCiFNR2x0REHYc9U=
+
 "@types/events@*":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
@@ -818,6 +833,11 @@
     "@types/events" "*"
     "@types/minimatch" "*"
     "@types/node" "*"
+
+"@types/long@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/long/-/long-4.0.0.tgz#719551d2352d301ac8b81db732acb6bdc28dbdef"
+  integrity sha512-1w52Nyx4Gq47uuu0EVcsHBxZFJgurQ+rTKS3qMHxR1GY2T8c2AJYd6vZoZ9q1rupaDjU0yT+Jc2XTyXkjeMA+Q==
 
 "@types/minimatch@*":
   version "3.0.3"
@@ -1057,30 +1077,6 @@
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@vue/web-component-wrapper/-/web-component-wrapper-1.2.0.tgz#bb0e46f1585a7e289b4ee6067dcc5a6ae62f1dd1"
   integrity sha512-Xn/+vdm9CjuC9p3Ae+lTClNutrVhsXpzxvoTXXtoys6kVRX9FkueSUAqSWAyZntmVLlR4DosBV4pH8y5Z/HbUw==
-
-"@waves/data-entities@^1.6.0":
-  version "1.10.1"
-  resolved "https://registry.yarnpkg.com/@waves/data-entities/-/data-entities-1.10.1.tgz#8343f0947021c72ed386e882bd1aa8de95aefe20"
-  integrity sha512-i9s7CACWPwpghKydfxIsMYATnd9KhDdm2Ga4wfPxyfsZA+t2xX8iON8pQ4jakQ0IpTbuPTld+M0FQcexWVOkKw==
-  dependencies:
-    bignumber.js "7.0.1"
-
-"@waves/ledger@^0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@waves/ledger/-/ledger-0.1.5.tgz#8aa021faeae4292c66946093a963050c2c6a247f"
-  integrity sha512-UTYX+LF1cE/fXJNJGI+C8ffW7TPa+m89MUfx9ag2FQl/Lh8UTQV8dvbZHUvIWrpmUFrH5NL5TwENGBI8FQTqog==
-  dependencies:
-    "@ledgerhq/hw-transport-u2f" "^4.15.0"
-    "@waves/signature-generator" "^1.0.4"
-
-"@waves/signature-generator@^1.0.4":
-  version "1.1.9"
-  resolved "https://registry.yarnpkg.com/@waves/signature-generator/-/signature-generator-1.1.9.tgz#caceaf1c567db3bb819c610faff743d13b5649eb"
-  integrity sha512-9WXclI0+q0964WCndvRe+RrVPCd0bLaiI5BQQzaJ63RpBpYKDDXVkuL+v0q/VaOR6GfvRPjvAqAFWmx1Iktmgg==
-  dependencies:
-    "@waves/data-entities" "^1.6.0"
-    base64-js "1.3.0"
-    crypto-js "3.1.9-1"
 
 "@webassemblyjs/ast@1.7.11":
   version "1.7.11"
@@ -1621,7 +1617,7 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
 
-base64-js@1.3.0, base64-js@^1.0.2:
+base64-js@^1.0.2, base64-js@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.3.0.tgz#cab1e6118f051095e58b5281aea8c1cd22bfc0e3"
   integrity sha512-ccav/yGvoa80BQDljCxsmmQ3Xvx60/UpBIij5QN21W3wBi/hhIC9OoO+KLpu9IJTS9j4DRVJ3aDDF9cMSoa2lw==
@@ -1670,11 +1666,6 @@ big.js@^5.2.2:
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/big.js/-/big.js-5.2.2.tgz#65f0af382f578bcdc742bd9c281e9cb2d7768328"
   integrity sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==
-
-bignumber.js@7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-7.0.1.tgz#8d2ff74fb2e7a78cbfc3a57bd63cd6106bf8903a"
-  integrity sha512-orXkDA6dhvrCTxYkWMDLIu8R1XWKfPWoJCkFeXOi/Rybl0FVUGHvgDYgUkWVn8fGa5mw2xy25VQGPPmrxfoZkQ==
 
 bignumber.js@^7.2.1:
   version "7.2.1"
@@ -2474,11 +2465,6 @@ crypto-browserify@^3.11.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
     randomfill "^1.0.3"
-
-crypto-js@3.1.9-1:
-  version "3.1.9-1"
-  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.1.9-1.tgz#fda19e761fc077e01ffbfdc6e9fdfc59e8806cd8"
-  integrity sha1-/aGedh/Ad+Af+/3G6f38WeiAbNg=
 
 css-color-names@0.0.4, css-color-names@^0.0.4:
   version "0.0.4"
@@ -4825,6 +4811,11 @@ loglevel@^1.6.3:
   resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.6.3.tgz#77f2eb64be55a404c9fd04ad16d57c1d6d6b1280"
   integrity sha512-LoEDv5pgpvWgPF4kNYuIp0qqSJVWak/dML0RY74xlzMZiT9w77teNAwKYKWBTYjlokMirg+o3jBwp+vlLrcfAA==
 
+long@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/long/-/long-4.0.0.tgz#9a7b71cfb7d361a194ea555241c92f7468d5bf28"
+  integrity sha512-XsP+KhQif4bjX1kbuSiySJFNAehNxgLb6hPRGJ9QsUr8ajHkuXGdrHmFUTUUXhDwVX2R5bY4JNZEwbUiMhV+MA==
+
 loose-envify@^1.0.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
@@ -5662,6 +5653,11 @@ parse-asn1@^5.0.0:
     evp_bytestokey "^1.0.0"
     pbkdf2 "^3.0.3"
     safe-buffer "^5.1.1"
+
+parse-json-bignumber@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/parse-json-bignumber/-/parse-json-bignumber-0.1.3.tgz#8ddf51dbd5dd6d8a644a68de1ab3ed85fac22c21"
+  integrity sha512-eE2NSq0PNe3yrtGVTuxrJSpP1pm2/NTRhfhsKA8oy2jDiYAK8BETabTFSymvw3pz6uuu8c4GpWRCCuVEdDFr8g==
 
 parse-json@^4.0.0:
   version "4.0.0"
