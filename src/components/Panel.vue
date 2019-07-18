@@ -7,7 +7,7 @@
             </b-field>
             <b-field label="Address ID" custom-class="is-size-5">
                 <b-select placeholder="0" size="is-medium" @input="handleConnect">
-                    <option v-for="n in 10" >{{ n - 1 }}</option>
+                    <option v-for="n in 11" >{{ n - 1 }}</option>
                 </b-select>
             </b-field>
         </b-field>
@@ -36,7 +36,8 @@
 
         <div class="has-text-centered">
             <br>
-            <b-button type="is-primary" size="is-medium" @click="signTransaction">Sign transaction</b-button>
+            <b-button v-if="userIsSigning" type="is-primary" size="is-medium" loading>Sign transaction</b-button>
+            <b-button v-else type="is-primary" size="is-medium" @click="signTransaction">Sign transaction</b-button>
             <br><br>
         </div>
 
