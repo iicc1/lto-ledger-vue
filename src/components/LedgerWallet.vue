@@ -1,46 +1,55 @@
 <template>
-    <div>
-    <section class="hero is-primary is-medium">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title">
-                    LTO Network
-                </h1>
-                <h2 class="subtitle">
-                    Ledger Wallet Interface
-                </h2>
-            </div>
-        </div>
-    </section>
+    <div class="main">
+        <Hero class="title"></Hero>
         <div class="container">
-            <div class="notification">
-                <Panel></Panel>
-            </div>
+            <div class="notification panel text-shadow shadow-effect"> <Panel></Panel></div>
         </div>
-
+         <Footer class="footer"></Footer>
     </div>
 </template>
 
 <script>
+    import Hero from "./Hero";
     import Panel from "./Panel";
+    import Footer from "./Footer"
     export default {
-        components: {Panel}
+        components: {Hero, Panel, Footer}
     }
 </script>
 
 <style scoped >
-    h3 {
-        margin: 40px 0 0;
+    .main{
+        background-color: #F9FAFF;
     }
-    ul {
-        list-style-type: none;
-        padding: 0;
+    .title{
+        background-color: #7E95EF;
+
     }
-    li {
-        display: inline-block;
-        margin: 0 10px;
+    .panel{
+        background-color: #F5F5F5;
+        margin-top: 90px;
     }
-    a {
-        color: #42b983;
+    .footer{
+        margin-top: 90px;
+        background-color: #ADC7FB;
+        color: white;
+        padding-bottom: 0px;
+    }
+    .text-shadow {
+        text-shadow: 0 0 10px rgba(65, 37, 150, 0.25);
+    }
+
+    .shadow-effect {
+        border: 1px solid rgba(65, 37, 150, 0.1);
+        box-shadow: 0px 0px 45px 0px rgba(65, 37, 150, 0.18);
+    }
+
+    .shadow-effect:hover, .shadow-effect:focus, .shadow-effect:active {
+        border: 1px solid rgba(65, 37, 150, 0.1);
+        box-shadow: 0px 0px 55px 0px rgba(65, 37, 150, 0.25);
+    }
+
+    .text-shadow:hover, .text-shadow:focus, .text-shadow:active {
+        text-shadow: 0 0 25px rgba(65, 37, 150, 0.35);
     }
 </style>

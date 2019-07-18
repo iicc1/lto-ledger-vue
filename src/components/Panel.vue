@@ -1,7 +1,7 @@
 <template>
     <section>
         <b-field grouped>
-            <b-field label="Select your Ledger address" expanded custom-class="is-size-5" v-bind:type="addressOk">
+            <b-field label="Your Ledger address" expanded custom-class="is-size-5" v-bind:type="addressOk">
                 <b-input v-if=address icon-pack="fas" size="is-medium" v-bind:value="address" disabled></b-input>
                 <b-input v-else icon-pack="fas" size="is-medium" placeholder="Loading address from Ledger device" loading></b-input>
             </b-field>
@@ -44,7 +44,4 @@
     </section>
 </template>
 
-<script src="./logic.js">
-
-
-</script>
+<script src="./logic.js"></script>

@@ -8,7 +8,7 @@ const options = {
     openTimeout: 3000,
     listenTimeout: 100000,
     exchangeTimeout: 100000,
-    networkCode: 76, // LTO Network mainnet
+    networkCode: 84, // 76 LTO Network mainnet 84 TESTNET
     transport: TransportU2F
 };
 const ledger = new WavesLedger(options);
@@ -49,7 +49,6 @@ export default {
     },
     methods: {
         async handleConnect(id) {
-            console.log(id);
             this.userId = id;
             this.userInfo = await ledger.getUserDataById(this.userId);
             if (this.userInfo.address) {
@@ -78,22 +77,46 @@ export default {
         async signTransaction() {
             this.userIsSigning = true;
             this.tx.timestamp = new Date().getTime();
-            let tx = {
+            let tx2 = {
                 type: 8,
                 version: 2,
-                senderPublicKey: 'FV7aGXA66sjfKn3dZT7ArriCpx8S5GXtHzyUNNfoV4Rf',
-                timestamp: 1563408496736,
-                amount: 1000000000,
+                senderPublicKey: '6x8szHwCLYVjKR2N8u4Ux4XLkTUB7nobDNDX1tniH3mp',
+                timestamp: 1563442673094,
+                amount: 100000000,
                 fee: 100000000,
-                recipient: '3Jn8EFisiWfiW1E9a4a1SLJepPN7bqGTvQs',
+                recipient: '3MyhVrN18vX7X77AeF8mzL8arJnkicY4GDc',
                 attachment: ''
+            };
+
+            let tx = {
+                type: 4,
+                version: 2,
+                senderPublicKey: '6x8szHwCLYVjKR2N8u4Ux4XLkTUB7nobDNDX1tniH3mp',
+                timestamp: 1563442673094,
+                amount: 100000000,
+                fee: 100000000,
+                recipient: '3MyhVrN18vX7X77AeF8mzL8arJnkicY4GDc',
+                attachment: ''
+            };
+
+            let tx22 = {
+                type: 9,
+                version: 2,
+                senderPublicKey: '6x8szHwCLYVjKR2N8u4Ux4XLkTUB7nobDNDX1tniH3mp',
+                timestamp: 1563442673094,
+                amount: 100000000,
+                fee: 100000000,
+                leaseId: '5zB1xv7e4WA2q3n1WhxWSKEvVDyBjAZrmqDxsFtZht1x',
+                chainId:84
             };
 
             const bytes = binary.serializeTx(tx);
             console.log("bytes: " + bytes);
+            console.log("json:" + json.stringifyTx(binary.parseTx(bytes)))
             try {
                 const signature = await ledger.signTransaction(this.userId, '', bytes);
-                tx.signature = signature;
+                tx.proofs = [];
+                tx.proofs.push(signature);
                 const bytes2 = binary.serializeTx(tx);
                 const txb = binary.parseTx(bytes2)
                 const jsonString = json.stringifyTx(txb)
