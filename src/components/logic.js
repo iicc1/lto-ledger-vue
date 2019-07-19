@@ -1,5 +1,5 @@
 import TransportU2F from '@ledgerhq/hw-transport-u2f';
-import {WavesLedger} from 'iicc1/lto-ledger-js-unofficial';
+import {WavesLedger} from 'lto-ledger-js-unofficial-test';
 import { binary, json } from '@lto-network/lto-marshall'
 
 const options = {
