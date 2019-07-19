@@ -1,7 +1,7 @@
 <template>
     <section>
         <b-field grouped>
-            <b-field label="Your Ledger address" expanded custom-class="is-size-5" v-bind:type="addressOk">
+            <b-field label="Your Ledger address" expanded custom-class="is-size-5" v-bind:type="ledgerAddressIsOk">
                 <b-input v-if=address icon-pack="fas" size="is-medium" v-bind:value="address" disabled></b-input>
                 <b-input v-else icon-pack="fas" size="is-medium" placeholder="Loading address from Ledger device" loading></b-input>
             </b-field>
@@ -15,10 +15,10 @@
         <b-field grouped>
             <b-field label="Transaction type" custom-class="is-size-5">
                 <b-select placeholder="Select a type" size="is-medium" @input="transactionTypeSelection">
-                    <option value="4">Transfer</option>
-                    <option value="8">Start Lease</option>
-                    <option value="9">Cancel Lease</option>
-                    <option value="15">Anchor</option>
+                    <option value=4>Transfer</option>
+                    <option value=8>Start Lease</option>
+                    <option value=9>Cancel Lease</option>
+                    <option value=15>Anchor</option>
                 </b-select>
             </b-field>
             <b-field label="Amount" expanded custom-class="is-size-5">
@@ -26,7 +26,7 @@
             </b-field>
         </b-field>
 
-        <b-field label="To address" custom-class="is-size-5" v-bind:type="recipientOk">
+        <b-field label="To address" custom-class="is-size-5" v-bind:type="recipientIsOk">
             <b-input name="LTO Network address" expanded size="is-medium" @input="recipientSelection"></b-input>
         </b-field>
 
