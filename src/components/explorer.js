@@ -23,40 +23,36 @@ export default {
             else if (!address || address == '') {
                 return {
                     status: 500,
-                    error: "Not a valid addresses el maximo por ",
+                    error: "Not a valid address",
                     data: null
                 }
             }
             else {
-                let url;
-                if(details) {
-                    url = `${explorerUrl.network}addresses/balance/details/${address}`;
-                } else {
-                    url = `${explorerUrl.network}addresses/balance/${address}`;
+                try {
+                    let url;
+                    if(details) {
+                        url = `${explorerUrl.network}addresses/balance/details/${address}`;
+                    } else {
+                        url = `${explorerUrl.network}addresses/balance/${address}`;
+                    }
+                    const res = await fetch(url,{
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+
+                    const content = await res.json();
+
+                    return content;
                 }
-                
-                fetch(url,{
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(function(response) {
+                catch (err) {
                     return {
-                        status: response.status,
-                        data:  response.json()
+                        status: 500,
+                        error: err.toString(),
+                        data: null
                     }
-                })
-                .then(function(data) {
-                    console.log('data = ', data);
-                })
-                .catch(function(err) {
-                    console.error(err);
-                    return {
-                        status: err.status,
-                        data:  response.json()
-                    }
-                });
+                }
             }
 
         }
