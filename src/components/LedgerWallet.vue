@@ -2,6 +2,9 @@
     <div class="main">
         <Hero class="title"></Hero>
         <div class="container">
+            <div class="notification panel text-shadow shadow-effect"> <Address></Address></div>
+        </div>
+        <div class="container">
             <div class="notification panel text-shadow shadow-effect"> <Panel></Panel></div>
         </div>
          <Footer class="footer"></Footer>
