@@ -55,6 +55,28 @@ export default {
                 }
             }
 
+        },
+
+        async getPrice () {
+            try {
+                const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=lto-network&vs_currencies=usd%2Ceur%2Cbtc%2Ceth",{
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+
+                const content = await res.json();
+
+                return content;
+            }
+            catch (err) {
+                return {
+                    status: 500,
+                    error: err.toString(),
+                    data: null
+                }
+            }
         }
     }
 }
