@@ -1,7 +1,24 @@
 <template>
     <section>
-        <!-- <h3 class="title is-3">Title 3</h3> -->
-        <h4 class="title is-4">Balance</h4>
+        <div class="columns">
+            <div class="column is-half">
+               <h4 class="title is-4">Balance</h4>
+            </div>
+
+            <div class="column is-half">
+                 <div class="buttons">
+                     <!-- external-link-alt -->
+                    <b-button size="is-small" type="is-primary" icon-pack="fas" icon-left="external-link-alt">3JdURovWYftJPohw5s93VQT23wvxtLPsiFg</b-button>
+                </div>
+                <!-- <b-tag type="is-primary">3JdURovWYftJPohw5s93VQT23wvxtLPsiFg</b-tag>          -->
+            </div>
+        </div>
+
+        <strong> Total: </strong> <i>102012</i> LTO |  <i>10201.1</i>$
+        <br>
+        <strong> Available: </strong> <i>85858</i> LTO |  <i>8585.8</i>$
+
+        <b-loading :is-full-page="false" :active="true"></b-loading>
         <!-- <b-field grouped>
             <b-field label="Your Ledger address" expanded custom-class="is-size-5" v-bind:type="ledgerAddressIsOk">
                 <b-input v-if=address icon-pack="fas" size="is-medium" v-bind:value="address" disabled></b-input>
@@ -35,13 +52,6 @@
         <b-field label="Transaction Fee" custom-class="is-size-5">
             <b-input type="number" step=".00000001" min="0.5" placeholder="1,00 LTO" size="is-medium" @input="feeSelection"></b-input>
         </b-field> -->
-
-        <div class="has-text-centered">
-            <br>
-            <!-- <b-button v-if="userIsSigning" type="is-primary" size="is-medium" loading>Sign transaction</b-button>
-            <b-button v-else type="is-primary" size="is-medium" @click="signTransaction">Sign transaction</b-button> -->
-            <br><br>
-        </div>
 
     </section>
 
