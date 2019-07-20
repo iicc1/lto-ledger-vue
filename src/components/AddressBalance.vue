@@ -1,6 +1,6 @@
 <template>
     <section>
-        <b-field grouped>
+        <!-- <b-field grouped>
             <b-field label="Your Ledger address" expanded custom-class="is-size-5" v-bind:type="ledgerAddressIsOk">
                 <b-input v-if=address icon-pack="fas" size="is-medium" v-bind:value="address" disabled></b-input>
                 <b-input v-else icon-pack="fas" size="is-medium" placeholder="Loading address from Ledger device" loading></b-input>
@@ -32,16 +32,18 @@
 
         <b-field label="Transaction Fee" custom-class="is-size-5">
             <b-input type="number" step=".00000001" min="0.5" placeholder="1,00 LTO" size="is-medium" @input="feeSelection"></b-input>
-        </b-field>
+        </b-field> -->
 
         <div class="has-text-centered">
             <br>
-            <b-button v-if="userIsSigning" type="is-primary" size="is-medium" loading>Sign transaction</b-button>
-            <b-button v-else type="is-primary" size="is-medium" @click="signTransaction">Sign transaction</b-button>
+            <!-- <b-button v-if="userIsSigning" type="is-primary" size="is-medium" loading>Sign transaction</b-button>
+            <b-button v-else type="is-primary" size="is-medium" @click="signTransaction">Sign transaction</b-button> -->
             <br><br>
         </div>
 
     </section>
+
+     <!-- <div class="column is-four-fifths">is-four-fifths</div> -->
 </template>
 
 <script src="./explorer.js"></script>

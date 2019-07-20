@@ -1,9 +1,19 @@
 <template>
     <div class="main">
         <Hero class="title"></Hero>
+
         <div class="container">
-            <div class="notification panel text-shadow shadow-effect"> <Address></Address></div>
+            <div class="columns">
+                <div class="column is-two-thirds">
+                    <div class="notification panel-address text-shadow shadow-effect"> <AddressBalance></AddressBalance></div>
+                </div>
+
+                <div class="column">
+                    <div class="notification panel-network text-shadow shadow-effect"> <NetworkSwitch></NetworkSwitch></div>
+                </div>
+            </div>
         </div>
+
         <div class="container">
             <div class="notification panel text-shadow shadow-effect"> <Panel></Panel></div>
         </div>
@@ -14,9 +24,11 @@
 <script>
     import Hero from "./Hero";
     import Panel from "./Panel";
-    import Footer from "./Footer"
+    import Footer from "./Footer";
+    import AddressBalance from "./AddressBalance";
+    import NetworkSwitch from "./NetworkSwitch";
     export default {
-        components: {Hero, Panel, Footer}
+        components: {Hero, Panel, Footer, AddressBalance, NetworkSwitch}
     }
 </script>
 
@@ -30,6 +42,14 @@
     }
     .panel{
         background-color: #F5F5F5;
+        margin-top: 90px;
+    }
+    .panel-address{
+        background-color: rgb(86, 16, 143);
+        margin-top: 90px;
+    }
+    .panel-network{
+        background-color: rgb(130, 95, 211);
         margin-top: 90px;
     }
     .footer{
