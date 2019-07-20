@@ -4,6 +4,9 @@
          <p>
             Made by <a href="https://t.me/iicc1">@iicc1</a> with help of <a href="https://t.me/unai93">@unai93</a> using <a href="https://vuejs.org">Vue.js</a> and <a href="https://buefy.org">Buefy</a>
             <p>
+                Hosted by <a href="https://www.netlify.com/">Netlify</a>
+            </p>
+            <p>
                 Do you need help? Join <a href="https://t.me/ltonetwork/">LTO Network Tech chat</a>
             </p>
          <p>

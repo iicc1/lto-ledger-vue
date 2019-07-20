@@ -2,11 +2,18 @@
   "name": "ledger",
   "version": "0.1.0",
   "private": true,
+  "description": "",
+  "author": "",
   "scripts": {
     "serve": "vue-cli-service serve --https",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "electron:build": "vue-cli-service electron:build",
+    "electron:serve": "vue-cli-service electron:serve",
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps"
   },
+  "main": "background.js",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.9.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
@@ -14,17 +21,20 @@
     "@fortawesome/vue-fontawesome": "^0.1.6",
     "@ledgerhq/hw-transport-u2f": "^4.63.2",
     "@lto-network/lto-marshall": "^1.0.0",
-    "lto-ledger-js-unofficial-test": "^1.0.0",
     "axios": "^0.18.0",
     "babel-runtime": "^6.26.0",
     "bignumber.js": "^7.2.1",
     "buefy": "^0.7.10",
+    "lto-ledger-js-unofficial-test": "^1.0.0",
     "vue": "^2.6.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
     "@vue/cli-service": "^3.8.4",
+    "electron": "^5.0.0",
+    "electron-builder": "^21.1.1",
+    "vue-cli-plugin-electron-builder": "^1.3.6",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
@@ -51,8 +61,5 @@
     "last 2 versions",
     "not ie <= 8"
   ],
-  "main": "babel.config.js",
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "license": "ISC"
 }

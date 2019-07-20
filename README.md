@@ -1,4 +1,7 @@
 # lto-ledger-vue
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9747b4cf-1d96-4576-9408-dc147505ce8a/deploy-status)](https://app.netlify.com/sites/lto-testnet-ledger-beta/deploys)
+
 Community made Vue.js Ledger interface for LTO Network blockchain
 
 
@@ -6,7 +9,7 @@ Community made Vue.js Ledger interface for LTO Network blockchain
 
 Before getting started you would need:
 1. `git` installed locally in your computer
-1. `yarn` installed locally in your computer.  [Check yarn documentation]https://yarnpkg.com/en/docs/install#debian-stable)
+1. `yarn` installed locally in your computer.  [Check yarn documentation](https://yarnpkg.com/en/docs/install#debian-stable)
 
 ## Installation
 
