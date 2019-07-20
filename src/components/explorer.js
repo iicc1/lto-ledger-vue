@@ -3,11 +3,6 @@ const explorerUrl = {
     tesnet: "https://testnet.lto.network/"
 }
 
-const response = {
-    status,
-    error,
-    data
-}
 
 export default {
 
