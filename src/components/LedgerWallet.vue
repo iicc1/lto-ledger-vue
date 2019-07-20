@@ -4,12 +4,12 @@
 
         <div class="container">
             <div class="columns">
-                <div class="column is-two-thirds">
-                    <div class="notification panel-address text-shadow shadow-effect"> <AddressBalance></AddressBalance></div>
+                <div class="column is-half">
+                    <div class="notification panel text-shadow shadow-effect"> <AddressBalance></AddressBalance></div>
                 </div>
 
-                <div class="column">
-                    <div class="notification panel-network text-shadow shadow-effect"> <NetworkSwitch></NetworkSwitch></div>
+                <div class="column is-half">
+                    <div class="notification panel text-shadow shadow-effect"> <NetworkSwitch></NetworkSwitch></div>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
     import AddressBalance from "./AddressBalance";
     import NetworkSwitch from "./NetworkSwitch";
     export default {
-        components: {Hero, Panel, Footer, AddressBalance, NetworkSwitch}
+        components: {Hero, Panel, Footer, NetworkSwitch, AddressBalance}
     }
 </script>
 

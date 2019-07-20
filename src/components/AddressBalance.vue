@@ -1,5 +1,7 @@
 <template>
     <section>
+        <!-- <h3 class="title is-3">Title 3</h3> -->
+        <h4 class="title is-4">Balance</h4>
         <!-- <b-field grouped>
             <b-field label="Your Ledger address" expanded custom-class="is-size-5" v-bind:type="ledgerAddressIsOk">
                 <b-input v-if=address icon-pack="fas" size="is-medium" v-bind:value="address" disabled></b-input>
