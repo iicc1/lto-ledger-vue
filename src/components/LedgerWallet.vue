@@ -5,11 +5,11 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-half">
-                    <div class="notification panel text-shadow shadow-effect fixed-heigh-140"> <AddressBalance></AddressBalance></div>
+                    <div class="notification panel text-shadow shadow-effect min-height-140"> <AddressBalance></AddressBalance></div>
                 </div>
 
                 <div class="column is-half">
-                    <div class="notification panel text-shadow shadow-effect fixed-heigh-140"> <NetworkSwitch></NetworkSwitch></div>
+                    <div class="notification panel text-shadow shadow-effect min-height-140"> <NetworkSwitch></NetworkSwitch></div>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
     }
     .panel{
         background-color: #F5F5F5;
-        margin-top: 90px;
+        margin-top: 20px;
     }
     .panel-address{
         background-color: rgb(86, 16, 143);
@@ -57,13 +57,16 @@
         background-color: #ADC7FB;
         color: white;
         padding-bottom: 0px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
     }
     .text-shadow {
         text-shadow: 0 0 10px rgba(65, 37, 150, 0.25);
     }
 
-    .fixed-heigh-140 {
-        height: 140px;
+    .min-height-140 {
+        min-height: 140px;
     }
     .shadow-effect {
         border: 1px solid rgba(65, 37, 150, 0.1);
