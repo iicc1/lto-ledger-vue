@@ -1,7 +1,7 @@
+import "@babel/polyfill";
 import TransportU2F from '@ledgerhq/hw-transport-u2f';
 import {WavesLedger} from 'lto-ledger-js-unofficial-test';
-import { binary, json } from '@lto-network/lto-marshall'
-import { EventBus } from './../event-bus';
+import { binary } from '@lto-network/lto-marshall'
 
 const options = {
     debug: true,
@@ -19,8 +19,8 @@ export default {
         return {
             userId: 0,
             publicKey: null,
-            address: null,
             ledgerAddressIsOk: null,
+            address: null,
             recipientIsOk: null,
             userIsSigning: false,
             txData: {
@@ -35,12 +35,10 @@ export default {
     mounted: async function () {
         const userInfo = await ledger.getUserDataById(this.userId);
         if (userInfo.address) {
-            this.address = userInfo.address;
+            this.$root.address = userInfo.address;
+            this.address = this.$root.address;
             this.publicKey = userInfo.publicKey;
             this.ledgerAddressIsOk = "is-success";
-            
-            // /event
-            this.addressSelection(this.address);
         }
     },
     methods: {
@@ -48,16 +46,11 @@ export default {
             this.userId = id;
             const userInfo = await ledger.getUserDataById(this.userId);
             if (userInfo.address) {
-                this.address = userInfo.address;
+                this.$root.address = userInfo.address;
+                this.address = this.$root.address;
                 this.publicKey = userInfo.publicKey;
                 this.ledgerAddressIsOk = "is-success";
-
-                // /event
-                this.addressSelection(this.address);
             }
-        },
-        async addressSelection(address) {
-            EventBus.$emit('address-selection', address);
         },
         async transactionTypeSelection(type) {
             this.txData.type = type;
@@ -66,13 +59,18 @@ export default {
             this.txData.amount = amount * 10000000;
         },
         async recipientSelection(recipient) {
-            if (/^(3[mMjJ]\w{33})$/.test(recipient)) {
+            let regex;
+            if (this.$root.network == 'mainnet') {
+                regex = /^(3[jJ]\w{33})$/;
+            } else {
+                regex = /^(3[mM]\w{33})$/;
+            }
+            if (regex.test(recipient)) {
                 this.txData.recipient = recipient;
                 this.recipientIsOk = "is-success";
             } else {
                 this.recipientIsOk = "is-danger";
             }
-            this.addressSelection(recipient);
         },
         async feeSelection(fee) {
             this.txData.fee = fee * 10000000;

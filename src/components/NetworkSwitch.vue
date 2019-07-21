@@ -8,14 +8,14 @@
 
         <div class="columns">
             <div class="column is-half">
-                <h5 v-if="isSwitchedCustom == 'Mainet'" class="title is-5">LTO Mainet Network</h5>
-                <h5 v-else  class="title is-5">LTO Tesnet Network</h5>
+                <h5 v-if="isSwitchedCustom == 'Mainnet'" class="title is-5">LTO Mainnet Network</h5>
+                <h5 v-else  class="title is-5">LTO Testnet Network</h5>
             </div>
 
             <div class="column is-half">
                 <div class="field">
-                    <b-switch v-model="isSwitchedCustom"
-                        true-value="Mainet"
+                    <b-switch @input="networkChange" size="is-medium" v-model="isSwitchedCustom"
+                        true-value="Mainnet"
                         false-value="Testnet">
                         {{ isSwitchedCustom }}
                     </b-switch>
@@ -32,8 +32,13 @@
         data() {
             return {
                 isSwitched: false,
-                isSwitchedCustom: 'Mainet'
+                isSwitchedCustom: 'Mainnet'
             }
+        },
+        methods: {
+            async networkChange(selector) {
+                this.$root.network = selector;
+            },
         }
     }
 </script>

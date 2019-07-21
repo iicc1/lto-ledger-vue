@@ -1,23 +1,17 @@
 const explorerUrl = {
-    mainet: "https://nodes.lto.network/",
-    tesnet: "https://testnet.lto.network/"
-}
+    mainnet: "https://nodes.lto.network/",
+    testnet: "https://testnet.lto.network/"
+};
 
-import { EventBus } from './../event-bus';
-
-// Listen for the i-got-clicked event and its payload.
-EventBus.$on('address-selection', address => {
-//   console.log(`Oh, that's nice. It's gotten ${address} clicks! :)`)
-  getData(address);
-});
-var composedData;
-var addressData;
-var priceData;
-var loading = false;
+let address;
+let composedData;
+let addressData;
+let priceData;
+let loading = false;
 
 async function getData (address) {
     loading = true;
-    let addressData = await getAddressBalanceWithDetail('mainet', address, true);
+    let addressData = await getAddressBalanceWithDetail('mainnet', address, true);
     let priceData = await getPrice();
     composedData = {};
     if (priceData.hasOwnProperty("lto-network")) {
@@ -112,19 +106,22 @@ async function getAddressBalanceWithDetail (network, address, details) {
 }
 
 export default {
-
     methods: {
         data() {
             return {
-                addressData: addressData,
-                priceData: priceData,
-                composedData: priceData,
-                isLoading: loading
+                addressData: null,
+                priceData: null,
+                composedData: null,
+                isLoading: null,
+                address: null
             }
+        },
+        async testAddress() {
+            console.log(this.$root.address)
         },
         async addressInExplorer() {
             let url;
-            // if (tesnet) {
+            // if (testnet) {
             //     url = `https://testnet-explorer/${address}`
             // }
             // else {

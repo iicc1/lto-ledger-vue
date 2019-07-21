@@ -22,6 +22,11 @@ Vue.use(Buefy, {
 
 Vue.config.productionTip = false;
 
+
 new Vue({
-  render: h => h(App)
-}).$mount('#app');
+  render: h => h(App),
+  data:{
+    address: null,
+    network: 'mainnet',
+    }
+  }).$mount('#app');

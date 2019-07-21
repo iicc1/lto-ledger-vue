@@ -4,7 +4,7 @@
             <div class="column is-half">
                <h4 class="title is-4">Balance</h4>
             </div>
-
+            <b-button size="is-small" type="is-primary" icon-pack="fas" icon-left="external-link-alt" @click="testAddress">Test get address</b-button>
             <div class="column is-half">
                  <div class="buttons">
                      <!-- external-link-alt -->

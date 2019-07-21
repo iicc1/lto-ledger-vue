@@ -2,7 +2,7 @@
     <footer class="footer">
         <div class="content has-text-centered">
          <p>
-            Made by <a href="https://t.me/iicc1">@iicc1</a> with help of <a href="https://t.me/unai93">@unai93</a> using <a href="https://vuejs.org">Vue.js</a> and <a href="https://buefy.org">Buefy</a>
+            Made by <a href="https://t.me/iicc1">@iicc1</a> with help of <a href="https://t.me/unai93">@unai93</a> using <a href="https://github.com/vuejs/vue">Vue.js</a> and <a href="https://buefy.org">Buefy</a>
             <p>
                 Hosted by <a href="https://www.netlify.com/">Netlify</a>
             </p>
