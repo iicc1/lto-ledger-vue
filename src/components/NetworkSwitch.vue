@@ -1,6 +1,6 @@
 <template>
     <section>
-        <div class="columns">
+        <!-- <div class="columns">
             <div class="column is-full">
                 <h4 class="title is-4">Network Switch</h4>
             </div>
@@ -21,7 +21,7 @@
                     </b-switch>
                 </div>              
             </div>
-        </div>
+        </div> -->
     </section>
 </template>
 
