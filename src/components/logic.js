@@ -18,8 +18,8 @@ const explorerUrl = {
     testnet: "https://testnet.lto.network/"
 };
 
-async function getData(address) {
-    let addressData = await getAddressBalanceWithDetail('mainnet', address, true);
+async function getData(address, network) {
+    let addressData = await getAddressBalanceWithDetail(network, address, true);
     let priceData = await getPrice();
     let composedData = {};
     if (priceData.hasOwnProperty("lto-network")) {
@@ -39,7 +39,7 @@ async function getData(address) {
             }
         });
     }
-    return composedData;
+    return {"composedData":composedData,"addressData":addressData};
 }
 
 async function getPrice () {
@@ -62,7 +62,7 @@ async function getPrice () {
 }
 
 async function getAddressBalanceWithDetail(network, address, details) {
-    if (!explorerUrl.hasOwnProperty(network)) {
+    if (!explorerUrl.hasOwnProperty(network.toLowerCase())) {
         return {
             status: 500,
             error: "Not a valid network",
@@ -80,9 +80,9 @@ async function getAddressBalanceWithDetail(network, address, details) {
         try {
             let url;
             if(details) {
-                url = `${explorerUrl[network]}addresses/balance/details/${address}`;
+                url = `${explorerUrl[network.toLowerCase()]}addresses/balance/details/${address}`;
             } else {
-                url = `${explorerUrl[network]}addresses/balance/${address}`;
+                url = `${explorerUrl[network.toLowerCase()]}addresses/balance/${address}`;
             }
             const res = await fetch(url,{
                 method: 'GET',
@@ -134,7 +134,8 @@ export default {
             this.publicKey = userInfo.publicKey;
             this.ledgerAddressIsOk = "is-success";
             this.isLoading = true;
-            this.composedData = await getData(this.address);
+            this.composedData = await getData(this.address, this.network);
+
             this.isLoading = false;
         }
     },
@@ -144,18 +145,18 @@ export default {
         },
         async addressInExplorer() {
             let url;
-            // if (testnet) {
-            //     url = `https://testnet-explorer/${address}`
-            // }
-            // else {
-            //     url = `https://explorer.lto.network/${address}`
-            // }
+            let regex = /^(3[jJ]\w{33})$/;
+            if (this.network.toLowerCase() != "mainnet" && regex.test(this.address)) {
+                url = `https://testnet-explorer/addresses/${this.address}`
+            }
+            else {
+                url = `https://explorer.lto.network/addresses/${this.address}`
+            }
 
             let win = window.open(url, '_blank');
             win.focus();
         },
         async handleConnect(id) {
-            console.log(id)
             this.userId = id;
             const userInfo = await ledger.getUserDataById(this.userId);
             if (userInfo.address) {
@@ -163,7 +164,7 @@ export default {
                 this.publicKey = userInfo.publicKey;
                 this.ledgerAddressIsOk = "is-success";
                 this.isLoading = true;
-                this.composedData = await getData(this.address);
+                this.composedData = await getData(this.address, this.network);
                 this.isLoading = false;
             }
         },
@@ -175,7 +176,7 @@ export default {
         },
         async recipientSelection(recipient) {
             let regex;
-            if (this.network == 'mainnet') {
+            if (this.network.toLowerCase() == 'mainnet') {
                 regex = /^(3[jJ]\w{33})$/;
             } else {
                 regex = /^(3[mM]\w{33})$/;
@@ -186,6 +187,11 @@ export default {
             } else {
                 this.recipientIsOk = "is-danger";
             }
+            // console.log(recipient)
+            this.address = recipient;
+            this.isLoading = true;
+            this.composedData = await getData(recipient, this.network);
+            this.isLoading = false;
         },
         async feeSelection(fee) {
             this.txData.fee = fee * 10000000;

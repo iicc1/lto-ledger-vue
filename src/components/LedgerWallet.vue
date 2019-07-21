@@ -20,7 +20,7 @@
                         <div class="column is-half">
                         <h4 class="title is-4">Balance</h4>
                         </div>
-                        <div class="column is-half">
+                        <div class="column is-half" v-if="address">
                             <div class="buttons">
                                 <!-- external-link-alt -->
                                 <b-button size="is-small" type="is-primary" icon-pack="fas" icon-left="external-link-alt" @click="addressInExplorer">Check in explorer</b-button>
@@ -28,10 +28,10 @@
                             <!-- <b-tag type="is-primary">3JdURovWYftJPohw5s93VQT23wvxtLPsiFg</b-tag>          -->
                         </div>
                     </div>
-                    <span v-if="!isLoading && addressData">
-                    <strong> Total: </strong> <i>{{(addressData.regular / 1000000).toFixed(2)}}</i> LTO |  <i>{{composedData[usd].regular}}</i> $
+                    <span v-if="!isLoading && composedData">
+                    <strong> Total: </strong> <i>{{(composedData["addressData"].regular / 1000000).toFixed(2)}}</i> LTO |  <i>{{composedData["composedData"]["usd"].regular.toFixed(2)}}</i> $
                     <br>
-                    <strong> Available: </strong> <i>{{(addressData.available / 1000000).toFixed(2)}}</i> LTO |  <i>{{composedData[usd].available}}</i> $
+                    <strong> Available: </strong> <i>{{(composedData["addressData"].available / 1000000).toFixed(2)}}</i> LTO |  <i>{{composedData["composedData"]["usd"].available.toFixed(2)}}</i> $
                     </span>
 
 
