@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <div class="hero-title">
+        <div class="hero-title title">
             <div class="hero-body">
                 <div class="container">
                     <h1 class="title" style="color: white; font-weight: bold; font-size: 1.25em">
