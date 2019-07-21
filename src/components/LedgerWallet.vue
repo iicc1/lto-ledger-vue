@@ -132,15 +132,8 @@
     </div>
 </template>
 
-<script>
-    // import Hero from "./Hero";
-    // import Panel from "./Panel";
-    // import Footer from "./Footer";
-    // import AddressBalance from "./AddressBalance";
-    // import NetworkSwitch from "./NetworkSwitch";
-    // export default {
-    //     components: {Hero, Panel, Footer, NetworkSwitch, AddressBalance}
-    // }
+<script src="./logic.js">
+
 </script>
 
 <style scoped >
