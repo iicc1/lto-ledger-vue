@@ -52,6 +52,19 @@ export default {
 
         },
 
+        async addressInExplorer() {
+            let url;
+            // if (tesnet) {
+            //     url = `https://testnet-explorer/${address}`
+            // }
+            // else {
+            //     url = `https://explorer.lto.network/${address}`
+            // }
+
+            var win = window.open(url, '_blank');
+            win.focus();
+        },
+
         async getPrice () {
             try {
                 const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=lto-network&vs_currencies=usd%2Ceur%2Cbtc%2Ceth",{
