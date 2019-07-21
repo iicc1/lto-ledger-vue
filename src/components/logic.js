@@ -1,6 +1,7 @@
 import TransportU2F from '@ledgerhq/hw-transport-u2f';
 import {WavesLedger} from 'lto-ledger-js-unofficial-test';
 import { binary, json } from '@lto-network/lto-marshall'
+import { EventBus } from './../event-bus';
 
 const options = {
     debug: true,
@@ -37,6 +38,9 @@ export default {
             this.address = userInfo.address;
             this.publicKey = userInfo.publicKey;
             this.ledgerAddressIsOk = "is-success";
+            
+            // /event
+            this.addressSelection(this.address);
         }
     },
     methods: {
@@ -47,7 +51,13 @@ export default {
                 this.address = userInfo.address;
                 this.publicKey = userInfo.publicKey;
                 this.ledgerAddressIsOk = "is-success";
+
+                // /event
+                this.addressSelection(this.address);
             }
+        },
+        async addressSelection(address) {
+            EventBus.$emit('address-selection', address);
         },
         async transactionTypeSelection(type) {
             this.txData.type = type;
@@ -62,6 +72,7 @@ export default {
             } else {
                 this.recipientIsOk = "is-danger";
             }
+            this.addressSelection(recipient);
         },
         async feeSelection(fee) {
             this.txData.fee = fee * 10000000;

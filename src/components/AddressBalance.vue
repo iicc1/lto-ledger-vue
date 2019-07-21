@@ -13,12 +13,14 @@
                 <!-- <b-tag type="is-primary">3JdURovWYftJPohw5s93VQT23wvxtLPsiFg</b-tag>          -->
             </div>
         </div>
-
-        <strong> Total: </strong> <i>102012</i> LTO |  <i>10201.1</i>$
+        <span v-if="!isLoading && addressData">
+        <strong> Total: </strong> <i>{{(addressData.regular / 1000000).toFixed(2)}}</i> LTO |  <i>{{composedData[usd].regular}}</i> $
         <br>
-        <strong> Available: </strong> <i>85858</i> LTO |  <i>8585.8</i>$
+        <strong> Available: </strong> <i>{{(addressData.available / 1000000).toFixed(2)}}</i> LTO |  <i>{{composedData[usd].available}}</i> $
+        </span>
 
-        <b-loading :is-full-page="false" :active="true"></b-loading>
+
+        <b-loading :is-full-page="false" :active="isLoading"></b-loading>
         <!-- <b-field grouped>
             <b-field label="Your Ledger address" expanded custom-class="is-size-5" v-bind:type="ledgerAddressIsOk">
                 <b-input v-if=address icon-pack="fas" size="is-medium" v-bind:value="address" disabled></b-input>
