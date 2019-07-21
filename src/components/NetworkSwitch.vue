@@ -8,7 +8,8 @@
 
         <div class="columns">
             <div class="column is-half">
-               <p>You can change the LTO Network:</p>
+                <h5 v-if="isSwitchedCustom == 'Mainet'" class="title is-5">LTO Mainet Network</h5>
+                <h5 v-else  class="title is-5">LTO Tesnet Network</h5>
             </div>
 
             <div class="column is-half">
