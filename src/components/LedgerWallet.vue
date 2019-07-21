@@ -20,11 +20,10 @@
                         <div class="column is-half">
                         <h4 class="title is-4">Balance</h4>
                         </div>
-                        <b-button size="is-small" type="is-primary" icon-pack="fas" icon-left="external-link-alt" @click="testAddress">Test get address</b-button>
                         <div class="column is-half">
                             <div class="buttons">
                                 <!-- external-link-alt -->
-                                <b-button size="is-small" type="is-primary" icon-pack="fas" icon-left="external-link-alt" @click="addressInExplorer">See in explorer</b-button>
+                                <b-button size="is-small" type="is-primary" icon-pack="fas" icon-left="external-link-alt" @click="addressInExplorer">Check in explorer</b-button>
                             </div>
                             <!-- <b-tag type="is-primary">3JdURovWYftJPohw5s93VQT23wvxtLPsiFg</b-tag>          -->
                         </div>
@@ -50,16 +49,16 @@
 
                         <div class="columns">
                             <div class="column is-half">
-                                <h5 v-if="isSwitchedCustom == 'Mainnet'" class="title is-5">LTO Mainnet Network</h5>
+                                <h5 v-if="network == 'Mainnet'" class="title is-5">LTO Mainnet Network</h5>
                                 <h5 v-else  class="title is-5">LTO Testnet Network</h5>
                             </div>
 
                             <div class="column is-half">
                                 <div class="field">
-                                    <b-switch @input="networkChange" size="is-medium" v-model="isSwitchedCustom"
+                                    <b-switch @input="networkChange" size="is-medium" v-model="network"
                                         true-value="Mainnet"
                                         false-value="Testnet">
-                                        {{ isSwitchedCustom }}
+                                        {{ network }}
                                     </b-switch>
                                 </div>              
                             </div>

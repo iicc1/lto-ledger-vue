@@ -117,6 +117,7 @@ export default {
             isSwitched: false,
             composedData: null,
             isLoading: null,
+            addressData: null,
             txData: {
                 type: null,
                 amount: null,
@@ -154,6 +155,7 @@ export default {
             win.focus();
         },
         async handleConnect(id) {
+            console.log(id)
             this.userId = id;
             const userInfo = await ledger.getUserDataById(this.userId);
             if (userInfo.address) {
