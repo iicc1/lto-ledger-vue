@@ -20,8 +20,6 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/vue-fontawesome": "^0.1.6",
-    "@ledgerhq/hw-transport-node-hid": "^4.68.0",
-    "@ledgerhq/hw-transport-node-hid-noevents": "^4.68.0",
     "@ledgerhq/hw-transport-u2f": "^4.63.2",
     "@lto-network/lto-marshall": "^1.0.0",
     "axios": "^0.18.0",

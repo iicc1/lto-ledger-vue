@@ -1,7 +1,7 @@
 import "@babel/polyfill";
 import TransportU2F from '@ledgerhq/hw-transport-u2f';
 import {WavesLedger} from 'lto-ledger-js-unofficial-test';
-import { binary } from '@lto-network/lto-marshall'
+import {binary} from '@lto-network/lto-marshall'
 
 const options = {
     debug: true,
@@ -13,6 +13,96 @@ const options = {
 };
 const ledger = new WavesLedger(options);
 
+const explorerUrl = {
+    mainnet: "https://nodes.lto.network/",
+    testnet: "https://testnet.lto.network/"
+};
+
+async function getData(address) {
+    let addressData = await getAddressBalanceWithDetail('mainnet', address, true);
+    let priceData = await getPrice();
+    let composedData = {};
+    if (priceData.hasOwnProperty("lto-network")) {
+        let keys = Object.keys(priceData["lto-network"]);
+        keys.forEach(key => {
+            if (key == 'eur' || key == 'usd') {
+                composedData[key] = {
+                    "available": (addressData.available * priceData["lto-network"][key]) / 100000000,
+                    "regular": (addressData.regular * priceData["lto-network"][key]) / 100000000
+                }
+            }
+            else {
+                composedData[key] = {
+                    "available": ((addressData.available * priceData["lto-network"][key]) / 100000000).toFixed(2),
+                    "regular": ((addressData.regular * priceData["lto-network"][key]) / 100000000).toFixed(2)
+                }
+            }
+        });
+    }
+    return composedData;
+}
+
+async function getPrice () {
+    try {
+        const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=lto-network&vs_currencies=usd%2Ceur%2Cbtc%2Ceth",{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        return await res.json();
+    }
+    catch (err) {
+        return {
+            status: 500,
+            error: err.toString(),
+            data: null
+        }
+    }
+}
+
+async function getAddressBalanceWithDetail(network, address, details) {
+    if (!explorerUrl.hasOwnProperty(network)) {
+        return {
+            status: 500,
+            error: "Not a valid network",
+            data: null
+        }
+    }
+    else if (!address || address == '') {
+        return {
+            status: 500,
+            error: "Not a valid address",
+            data: null
+        }
+    }
+    else {
+        try {
+            let url;
+            if(details) {
+                url = `${explorerUrl[network]}addresses/balance/details/${address}`;
+            } else {
+                url = `${explorerUrl[network]}addresses/balance/${address}`;
+            }
+            const res = await fetch(url,{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            return await res.json();
+        }
+        catch (err) {
+            return {
+                status: 500,
+                error: err.toString(),
+                data: null
+            }
+        }
+    }
+
+}
+
 export default {
     name: 'Panel',
     data() {
@@ -23,6 +113,10 @@ export default {
             address: null,
             recipientIsOk: null,
             userIsSigning: false,
+            network: 'Mainnet',
+            isSwitched: false,
+            composedData: null,
+            isLoading: null,
             txData: {
                 type: null,
                 amount: null,
@@ -35,21 +129,40 @@ export default {
     mounted: async function () {
         const userInfo = await ledger.getUserDataById(this.userId);
         if (userInfo.address) {
-            this.$root.address = userInfo.address;
-            this.address = this.$root.address;
+            this.address = userInfo.address;
             this.publicKey = userInfo.publicKey;
             this.ledgerAddressIsOk = "is-success";
+            this.isLoading = true;
+            this.composedData = await getData(this.address);
+            this.isLoading = false;
         }
     },
     methods: {
+        async networkChange(selector) {
+            this.network = selector;
+        },
+        async addressInExplorer() {
+            let url;
+            // if (testnet) {
+            //     url = `https://testnet-explorer/${address}`
+            // }
+            // else {
+            //     url = `https://explorer.lto.network/${address}`
+            // }
+
+            let win = window.open(url, '_blank');
+            win.focus();
+        },
         async handleConnect(id) {
             this.userId = id;
             const userInfo = await ledger.getUserDataById(this.userId);
             if (userInfo.address) {
-                this.$root.address = userInfo.address;
-                this.address = this.$root.address;
+                this.address = userInfo.address;
                 this.publicKey = userInfo.publicKey;
                 this.ledgerAddressIsOk = "is-success";
+                this.isLoading = true;
+                this.composedData = await getData(this.address);
+                this.isLoading = false;
             }
         },
         async transactionTypeSelection(type) {
@@ -60,7 +173,7 @@ export default {
         },
         async recipientSelection(recipient) {
             let regex;
-            if (this.$root.network == 'mainnet') {
+            if (this.network == 'mainnet') {
                 regex = /^(3[jJ]\w{33})$/;
             } else {
                 regex = /^(3[mM]\w{33})$/;
