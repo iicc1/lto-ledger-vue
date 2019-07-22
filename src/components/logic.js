@@ -6,30 +6,30 @@ import {binary} from '@lto-network/lto-marshall'
 
 async function getData(address, network, api) {
     let addressData = await getAddressBalance(network, address, api);
+    let priceData = await getPrice();
     if (addressData.error) {
         // throw notification. .error .message
-
-        return null;
+        return {"error": "Error getting balance data"};
     }
-    let priceData = await getPrice();
-    if (priceData.error) {
+    else if (priceData.error) {
         // throw notification. .error .message
-
-        return null;
+        return {"error": "Error getting price data"};
     }
-    let composedData = {};
-    if (priceData.hasOwnProperty("lto-network")) {
-        let keys = Object.keys(priceData["lto-network"]);
-        keys.forEach(key => {
-            if (key == 'usd') {
-                composedData[key] = {
-                    "available": (addressData.available * priceData["lto-network"][key]) / 100000000,
-                    "regular": (addressData.regular * priceData["lto-network"][key]) / 100000000
+    else {
+        let composedData = {};
+        if (priceData.hasOwnProperty("lto-network")) {
+            let keys = Object.keys(priceData["lto-network"]);
+            keys.forEach(key => {
+                if (key == 'usd') {
+                    composedData[key] = {
+                        "available": (addressData.available * priceData["lto-network"][key]) / 100000000,
+                        "regular": (addressData.regular * priceData["lto-network"][key]) / 100000000
+                    }
                 }
-            }
-        });
+            });
+        }
+        return {"composedData":composedData,"addressData":addressData};
     }
-    return {"composedData":composedData,"addressData":addressData};
 }
 
 async function getPrice() {
@@ -117,7 +117,22 @@ export default {
             this.publicKey = userInfo.publicKey;
             this.ledgerAddressIsOk = "is-success";
             this.isLoading = true;
-            this.composedData = await getData(this.address, this.network, this.api);
+            let dataGet = await getData(recipient, this.network, this.api);
+            // this.composedData
+            if (dataGet.hasOwnProperty("error"))
+            {
+                this.$notification.open({
+                    message: dataGet.error,
+                    position: 'is-bottom-right',
+                    duration: 20000,
+                    type: 'is-danger',
+                    hasIcon: true,
+                    queue: false
+                })
+            }
+            else {
+                this.composedData = dataGet;
+            }
             this.isLoading = false;
         }
     },
@@ -137,8 +152,24 @@ export default {
                 this.address = userInfo.address;
                 this.publicKey = userInfo.publicKey;
                 this.ledgerAddressIsOk = "is-success";
+
                 this.isLoading = true;
-                this.composedData = await getData(this.address, this.network, this.api);
+                let dataGet = await getData(recipient, this.network, this.api);
+                // this.composedData 
+                if (dataGet.hasOwnProperty("error"))
+                {
+                    this.$notification.open({
+                        message: dataGet.error,
+                        position: 'is-bottom-right',
+                        duration: 20000,
+                        type: 'is-danger',
+                        hasIcon: true,
+                        queue: false
+                    })
+                }
+                else {
+                    this.composedData = dataGet;
+                }
                 this.isLoading = false;
             }
         },
@@ -162,7 +193,22 @@ export default {
                 this.publicKey = userInfo.publicKey;
                 this.ledgerAddressIsOk = "is-success";
                 this.isLoading = true;
-                this.composedData = await getData(this.address, this.network, this.api);
+                let dataGet = await getData(recipient, this.network, this.api);
+                // this.composedData
+                if (dataGet.hasOwnProperty("error"))
+                {
+                    this.$notification.open({
+                        message: dataGet.error,
+                        position: 'is-bottom-right',
+                        duration: 20000,
+                        type: 'is-danger',
+                        hasIcon: true,
+                        queue: false
+                    })
+                }
+                else {
+                    this.composedData = dataGet;
+                }
                 this.isLoading = false;
             }
         },
@@ -188,9 +234,24 @@ export default {
             this.address = recipient;
 
             //Testing without ledger
-            //this.isLoading = true;
-            //this.composedData = await getData(recipient, this.network, this.api);
-            //this.isLoading = false;
+            // this.isLoading = true;
+            // let dataGet = await getData(recipient, this.network, this.api);
+            // // this.composedData
+            // if (dataGet.hasOwnProperty("error"))
+            // {
+            //     this.$notification.open({
+            //         message: dataGet.error,
+            //         position: 'is-bottom-right',
+            //         duration: 20000,
+            //         type: 'is-danger',
+            //         hasIcon: true,
+            //         queue: false
+            //     })
+            // }
+            // else {
+            //     this.composedData = dataGet;
+            // }
+            // this.isLoading = false;
 
         },
         async feeSelection(fee) {
