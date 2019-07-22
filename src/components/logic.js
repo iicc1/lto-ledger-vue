@@ -93,7 +93,7 @@ export default {
             network: 'Mainnet',
             isSwitched: false,
             composedData: null,
-            isLoading: null,
+            isLoading: true,
             addressData: null,
             // Transaction data
             txData: {
