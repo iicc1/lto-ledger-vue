@@ -169,7 +169,8 @@ export default {
         async addressInExplorer() {
             let url;
             let regex = /^(3[jJ]\w{33})$/;
-            if (this.network != "Mainnet" && regex.test(this.address)) {
+            // if (regex.test(this.address)) {
+            if (this.network.toLowerCase() != "mainnet") {
                 url = `https://testnet-explorer/addresses/${this.address}`
             }
             else {
@@ -177,6 +178,7 @@ export default {
             }
             let win = window.open(url, '_blank');
             win.focus();
+            // }
         },
         async handleConnect(id) {
             this.userId = id;
