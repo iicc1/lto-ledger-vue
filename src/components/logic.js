@@ -171,7 +171,7 @@ export default {
             let regex = /^(3[jJ]\w{33})$/;
             // if (regex.test(this.address)) {
             if (this.network.toLowerCase() != "mainnet") {
-                url = `https://testnet-explorer/addresses/${this.address}`
+                url = `https://testnet-explorer.lto.network/addresses/${this.address}`
             }
             else {
                 url = `https://explorer.lto.network/addresses/${this.address}`
