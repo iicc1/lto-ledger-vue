@@ -8,12 +8,10 @@ async function getData(address, network, api) {
     let addressData = await getAddressBalance(network, address, api);
     let priceData = await getPrice();
     if (addressData.error) {
-        // throw notification. .error .message
-        return {"error": "Error getting balance data"};
+        return {"error": "Error getting balance data: " + addressData.message};
     }
     else if (priceData.error) {
-        // throw notification. .error .message
-        return {"error": "Error getting price data"};
+        return {"error": "Error getting price data: " + priceData.message};
     }
     else {
         let composedData = {};
@@ -117,10 +115,8 @@ export default {
             this.publicKey = userInfo.publicKey;
             this.ledgerAddressIsOk = "is-success";
             this.isLoading = true;
-            let dataGet = await getData(recipient, this.network, this.api);
-            // this.composedData
-            if (dataGet.hasOwnProperty("error"))
-            {
+            let dataGet = await getData(this.address, this.network, this.api);
+            if (dataGet.hasOwnProperty("error")) {
                 this.$notification.open({
                     message: dataGet.error,
                     position: 'is-bottom-right',
@@ -152,12 +148,9 @@ export default {
                 this.address = userInfo.address;
                 this.publicKey = userInfo.publicKey;
                 this.ledgerAddressIsOk = "is-success";
-
                 this.isLoading = true;
-                let dataGet = await getData(recipient, this.network, this.api);
-                // this.composedData 
-                if (dataGet.hasOwnProperty("error"))
-                {
+                let dataGet = await getData(this.address, this.network, this.api);
+                if (dataGet.hasOwnProperty("error")) {
                     this.$notification.open({
                         message: dataGet.error,
                         position: 'is-bottom-right',
@@ -193,10 +186,8 @@ export default {
                 this.publicKey = userInfo.publicKey;
                 this.ledgerAddressIsOk = "is-success";
                 this.isLoading = true;
-                let dataGet = await getData(recipient, this.network, this.api);
-                // this.composedData
-                if (dataGet.hasOwnProperty("error"))
-                {
+                let dataGet = await getData(this.address, this.network, this.api);
+                if (dataGet.hasOwnProperty("error")){
                     this.$notification.open({
                         message: dataGet.error,
                         position: 'is-bottom-right',
