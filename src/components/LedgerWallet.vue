@@ -113,19 +113,19 @@
             </div>
         </div>
 
-        <footer class="footer">
+
+        <footer class="footer" >
             <div class="content has-text-centered">
-            <p>
-                Made by <a href="https://t.me/iicc1">@iicc1</a> with help of <a href="https://t.me/unai93">@unai93</a> using <a href="https://github.com/vuejs/vue">Vue.js</a> and <a href="https://buefy.org">Buefy</a>
-                <p>
-                    Hosted by <a href="https://www.netlify.com/">Netlify</a>
-                </p>
-                <p>
-                    Do you need help? Join <a href="https://t.me/ltonetwork/">LTO Network Tech chat</a>
-                </p>
-            <!-- <p> -->
+
+                Made by <a href="https://t.me/iicc1">@iicc1</a> & <a href="https://t.me/unai93">@unai93</a> using <a href="https://github.com/vuejs/vue">Vue.js</a> and <a href="https://buefy.org">Buefy</a>
+                <br>
+                Price data by Coingecko
+                    <!-- Hosted by <a href="https://www.netlify.com/">Netlify</a> -->
+                <br>
+                Do you need help? Join <a href="https://t.me/ltonetwork/">LTO Network Tech chat</a>
+                <br>
                 <iframe class="iframe-custom" src="https://ghbtns.com/github-btn.html?user=iicc1&repo=lto-ledger-vue&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-            <!-- </p> -->
+
             </div>
         </footer>
     </div>
@@ -138,7 +138,8 @@
 <style scoped >
     .main{
         background-color: #F9FAFF;
-        margin-bottom:240px;
+        height: 100%;
+        /* margin-bottom:240px; */
     }
     .hero-title{
         background-color: #7E95EF;
@@ -156,15 +157,12 @@
         margin-top: 90px;
     }
     .footer{
-        margin-top: 90px;
-        height: 210px;
         background-color: #ADC7FB;
         color: white;
         padding-bottom: 0px;
         position: fixed;
-        /* bottom: 0; */
-        width: 100%;
         bottom: 0px;
+        width: 100%;
         left: 0px;
         right: 0px;
         margin-bottom: 0px;
