@@ -30,9 +30,9 @@
                             </span>
                         </div>
                         <div class="column is-half" v-if="address">
-                            <div class="buttons is-pulled-right">
+                            <div class="buttons ">
                                 <!-- external-link-alt -->
-                                <b-button size="is-small" type="is-primary" @click="addressInExplorer">Check in explorer</b-button>
+                                <b-button  type="is-primary" @click="addressInExplorer">Check in explorer</b-button>
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                             </div>
 
                             <div class="column is-half">
-                                <div class="field is-pulled-right">
+                                <div class="field">
                                     <b-switch @input="networkChange" size="is-medium" v-model="network"
                                         true-value="Mainnet"
                                         false-value="Testnet">
@@ -121,12 +121,12 @@
             <div class="content has-text-centered">
 
                 Made by <a href="https://t.me/iicc1">@iicc1</a> & <a href="https://t.me/unai93">@unai93</a> using <a href="https://github.com/vuejs/vue">Vue.js</a> and <a href="https://buefy.org">Buefy</a>
-                <br>
-                Price data by Coingecko
+                <br><br>
+                Price data by <a href="https://www.coingecko.com">Coingecko</a>
                     <!-- Hosted by <a href="https://www.netlify.com/">Netlify</a> -->
-                <br>
+                <br><br>
                 Do you need help? Join <a href="https://t.me/ltonetwork/">LTO Network Tech chat</a>
-                <br>
+                <br><br>
                 <iframe class="iframe-custom" src="https://ghbtns.com/github-btn.html?user=iicc1&repo=lto-ledger-vue&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
 
             </div>
@@ -149,26 +149,17 @@
     }
     .panel{
         background-color: #F5F5F5;
-        margin-top: 20px;
-    }
-    .panel-address{
-        background-color: rgb(86, 16, 143);
-        margin-top: 90px;
-    }
-    .panel-network{
-        background-color: rgb(130, 95, 211);
-        margin-top: 90px;
+        margin-top: 40px;
     }
     .footer{
         background-color: #ADC7FB;
         color: white;
         padding-bottom: 0px;
-        position: fixed;
+        margin-top: 70px;
         bottom: 0px;
         width: 100%;
         left: 0px;
         right: 0px;
-        margin-bottom: 0px;
     }
     .text-shadow {
         text-shadow: 0 0 10px rgba(65, 37, 150, 0.25);
