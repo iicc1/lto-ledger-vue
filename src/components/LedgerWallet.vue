@@ -57,7 +57,7 @@
                             </div>
 
                             <div class="column is-half">
-                                <div class="field">
+                                <div class="field right">
                                     <b-switch @input="networkChange" size="is-medium" v-model="network"
                                         true-value="Mainnet"
                                         false-value="Testnet">
@@ -164,7 +164,9 @@
     .text-shadow {
         text-shadow: 0 0 10px rgba(65, 37, 150, 0.25);
     }
-
+    .right {
+        text-align: right
+    }
     .min-height-140 {
         min-height: 140px;
     }
