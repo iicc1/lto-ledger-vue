@@ -20,19 +20,22 @@
                         <div class="column is-half">
                         <h4 class="title is-4">Balance</h4>
                         </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column is-half">
+                            <span v-if="!isLoading && composedData">
+                            <strong> Total: </strong> <i>{{(composedData["addressData"].regular / 100000000).toFixed(2)}}</i> LTO |  <i>{{composedData["composedData"]["usd"].regular.toFixed(2)}}</i> $
+                            <br>
+                            <strong> Available: </strong> <i>{{(composedData["addressData"].available / 100000000).toFixed(2)}}</i> LTO |  <i>{{composedData["composedData"]["usd"].available.toFixed(2)}}</i> $
+                            </span>
+                        </div>
                         <div class="column is-half" v-if="address">
                             <div class="buttons is-pulled-right">
                                 <!-- external-link-alt -->
-                                <b-button size="is-small" type="is-primary" icon-pack="fas" icon-left="external-link-alt" @click="addressInExplorer">Check in explorer</b-button>
+                                <b-button size="is-small" type="is-primary" @click="addressInExplorer">Check in explorer</b-button>
                             </div>
-                            <!-- <b-tag type="is-primary">3JdURovWYftJPohw5s93VQT23wvxtLPsiFg</b-tag>          -->
                         </div>
                     </div>
-                    <span v-if="!isLoading && composedData">
-                    <strong> Total: </strong> <i>{{(composedData["addressData"].regular / 100000000).toFixed(2)}}</i> LTO |  <i>{{composedData["composedData"]["usd"].regular.toFixed(2)}}</i> $
-                    <br>
-                    <strong> Available: </strong> <i>{{(composedData["addressData"].available / 100000000).toFixed(2)}}</i> LTO |  <i>{{composedData["composedData"]["usd"].available.toFixed(2)}}</i> $
-                    </span>
 
 
                     <b-loading :is-full-page="false" :active="isLoading"></b-loading>
