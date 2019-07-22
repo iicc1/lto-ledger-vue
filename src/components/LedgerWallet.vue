@@ -29,9 +29,9 @@
                         </div>
                     </div>
                     <span v-if="!isLoading && composedData">
-                    <strong> Total: </strong> <i>{{(composedData["addressData"].regular / 1000000).toFixed(2)}}</i> LTO |  <i>{{composedData["composedData"]["usd"].regular.toFixed(2)}}</i> $
+                    <strong> Total: </strong> <i>{{(composedData["addressData"].regular / 100000000).toFixed(2)}}</i> LTO |  <i>{{composedData["composedData"]["usd"].regular.toFixed(2)}}</i> $
                     <br>
-                    <strong> Available: </strong> <i>{{(composedData["addressData"].available / 1000000).toFixed(2)}}</i> LTO |  <i>{{composedData["composedData"]["usd"].available.toFixed(2)}}</i> $
+                    <strong> Available: </strong> <i>{{(composedData["addressData"].available / 100000000).toFixed(2)}}</i> LTO |  <i>{{composedData["composedData"]["usd"].available.toFixed(2)}}</i> $
                     </span>
 
 
@@ -49,8 +49,8 @@
 
                         <div class="columns">
                             <div class="column is-half">
-                                <h5 v-if="network == 'Mainnet'" class="title is-5">LTO Mainnet Network</h5>
-                                <h5 v-else  class="title is-5">LTO Testnet Network</h5>
+                                <h5 v-if="network == 'Mainnet'" class="title is-5">LTO Functional Network</h5>
+                                <h5 v-else  class="title is-5">LTO Testing Environment</h5>
                             </div>
 
                             <div class="column is-half">
