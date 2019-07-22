@@ -30,9 +30,9 @@
                             </span>
                         </div>
                         <div class="column is-half" v-if="address">
-                            <div class="buttons right">
+                            <div class="buttons is-pulled-right">
                                 <!-- external-link-alt -->
-                                <b-button  type="is-primary" @click="addressInExplorer">Check in explorer</b-button>
+                                <b-button type="is-primary" @click="addressInExplorer">Check in explorer</b-button>
                             </div>
                         </div>
                     </div>
