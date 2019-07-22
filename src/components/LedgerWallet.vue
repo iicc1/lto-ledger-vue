@@ -21,7 +21,7 @@
                         <h4 class="title is-4">Balance</h4>
                         </div>
                         <div class="column is-half" v-if="address">
-                            <div class="buttons">
+                            <div class="buttons is-pulled-right">
                                 <!-- external-link-alt -->
                                 <b-button size="is-small" type="is-primary" icon-pack="fas" icon-left="external-link-alt" @click="addressInExplorer">Check in explorer</b-button>
                             </div>
@@ -54,7 +54,7 @@
                             </div>
 
                             <div class="column is-half">
-                                <div class="field">
+                                <div class="field is-pulled-right">
                                     <b-switch @input="networkChange" size="is-medium" v-model="network"
                                         true-value="Mainnet"
                                         false-value="Testnet">
