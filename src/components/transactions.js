@@ -1,6 +1,6 @@
 let Base58 = require("base-58");
 
-let longToByteArray = function(long) {
+export let longToByteArray = function(long) {
     const byteArray = [0, 0, 0, 0, 0, 0, 0, 0];
     for (let index = 0; index < byteArray.length; index ++ ) {
         const byte = long & 0xff;

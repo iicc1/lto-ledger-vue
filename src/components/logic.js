@@ -2,7 +2,8 @@ import "@babel/polyfill";
 import TransportU2F from '@ledgerhq/hw-transport-u2f';
 import {WavesLedger} from 'lto-ledger-js-unofficial-test';
 import {binary} from '@lto-network/lto-marshall';
-import "transactions";
+// import "transactions";
+import * as Transactions from './transactions.js'
 
 
 async function getData(address, network, api) {
@@ -252,6 +253,18 @@ export default {
             this.txData.fee = fee * 100000000;
         },
         async signTransaction() {
+
+            let beforeTx =  {
+                type: 4,
+                version: 2,
+                senderPublicKey: '6x8szHwCLYVjKR2N8u4Ux4XLkTUB7nobDNDX1tniH3mp',
+                timestamp: 1563442673094,
+                amount: 100000000,
+                fee: 100000000,
+                recipient: '3MyhVrN18vX7X77AeF8mzL8arJnkicY4GDc',
+                attachment: ''
+            };
+            let preparedData = Transactions.prepareBytes();
             // Validation
             if (! this.txData.type || ! this.txData.amount || ! this.txData.recipient || ! this.txData.fee) {
                 this.$notification.open({
