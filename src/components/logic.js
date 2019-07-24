@@ -264,7 +264,8 @@ export default {
                 recipient: '3MyhVrN18vX7X77AeF8mzL8arJnkicY4GDc',
                 attachment: ''
             };
-            let preparedData = Transactions.prepareBytes();
+            let preparedData = Transactions.prepareBytes(beforeTx);
+            console.log(preparedData)
             // Validation
             if (! this.txData.type || ! this.txData.amount || ! this.txData.recipient || ! this.txData.fee) {
                 this.$notification.open({
