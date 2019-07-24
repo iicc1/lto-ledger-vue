@@ -170,8 +170,6 @@ export default {
         },
         async addressInExplorer() {
             let url;
-            let regex = /^(3[jJ]\w{33})$/;
-            // if (regex.test(this.address)) {
             if (this.network.toLowerCase() != "mainnet") {
                 url = `https://testnet-explorer.lto.network/addresses/${this.address}`
             }
@@ -180,7 +178,6 @@ export default {
             }
             let win = window.open(url, '_blank');
             win.focus();
-            // }
         },
         async handleConnect(id) {
             this.userId = id;
@@ -227,27 +224,6 @@ export default {
                 this.recipientIsOk = "is-danger";
             }
             this.address = recipient;
-
-            //Testing without ledger
-            // this.isLoading = true;
-            // let dataGet = await getData(recipient, this.network, this.api);
-            // // this.composedData
-            // if (dataGet.hasOwnProperty("error"))
-            // {
-            //     this.$notification.open({
-            //         message: dataGet.error,
-            //         position: 'is-bottom-right',
-            //         duration: 20000,
-            //         type: 'is-danger',
-            //         hasIcon: true,
-            //         queue: false
-            //     })
-            // }
-            // else {
-            //     this.composedData = dataGet;
-            // }
-            // this.isLoading = false;
-
         },
         async feeSelection(fee) {
             this.txData.fee = fee * 100000000;
@@ -265,7 +241,6 @@ export default {
                 attachment: ''
             };
             let preparedData = Transactions.prepareBytes(beforeTx);
-            console.log(preparedData)
             // Validation
             if (! this.txData.type || ! this.txData.amount || ! this.txData.recipient || ! this.txData.fee) {
                 this.$notification.open({
@@ -310,15 +285,11 @@ export default {
             if (tx.type == 9) {
                 tx.leaseId = this.txData.leaseId;
             }
-            console.log(txlease)
             const bytes = binary.serializeTx(txlease);
-            console.log("bytes: " + bytes);
-            //console.log("json:" + json.stringifyTx(binary.parseTx(bytes)))
             try {
                 const signature = await this.ledger.signTransaction(this.userId, '', bytes); //1
                 txlease.proofs = [];
                 txlease.proofs.push(signature);
-                console.log("signature:" + signature);
                 this.$dialog.confirm({
                     title: 'Transaction signed successfully',
                     message: '<b>Transaction data:</b> <pre>' + JSON.stringify(txlease, null, 2) + '</pre>',
@@ -345,7 +316,6 @@ export default {
                                     icon: 'info-circle',
                                 })
                             } else {
-                                console.log(content);
                                 let txUrl;
                                 if (this.network.toLowerCase() != "mainnet") {
                                     txUrl = `https://testnet-explorer.lto.network/`;

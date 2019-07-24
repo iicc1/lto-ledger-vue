@@ -22,7 +22,6 @@ Vue.use(Buefy, {
 
 Vue.config.productionTip = false;
 
-
 new Vue({
   render: h => h(App),
   data:{
