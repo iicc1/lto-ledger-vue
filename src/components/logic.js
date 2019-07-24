@@ -346,7 +346,14 @@ export default {
                                 })
                             } else {
                                 console.log(content);
-                                this.$dialog.alert(`Transaction broadcasted over the network! You can track it <a href="https://explorer.lto.network/transaction/` + content.id + `">here</a>`)
+                                let txUrl;
+                                if (this.network.toLowerCase() != "mainnet") {
+                                    txUrl = `https://testnet-explorer.lto.network/`;
+                                }
+                                else {
+                                    txUrl = `https://explorer.lto.network/}`;
+                                }
+                                this.$dialog.alert(`Transaction broadcasted over the network! You can track it <a href="${txUrl}/transaction/` + content.id + `">here</a>`)
                             }
                         } catch (e) {
                             this.$dialog.alert({
