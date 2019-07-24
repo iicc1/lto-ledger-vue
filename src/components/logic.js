@@ -1,7 +1,8 @@
 import "@babel/polyfill";
 import TransportU2F from '@ledgerhq/hw-transport-u2f';
 import {WavesLedger} from 'lto-ledger-js-unofficial-test';
-import {binary} from '@lto-network/lto-marshall'
+import {binary} from '@lto-network/lto-marshall';
+import "transactions";
 
 
 async function getData(address, network, api) {
@@ -53,7 +54,7 @@ async function getAddressBalance(network, address, api) {
         const res = await fetch(url,{
             method: 'GET',
             headers: {
-               'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             }
         });
         return await res.json();
@@ -248,7 +249,7 @@ export default {
 
         },
         async feeSelection(fee) {
-            this.txData.fee = fee * 10000000;
+            this.txData.fee = fee * 100000000;
         },
         async signTransaction() {
             // Validation
@@ -276,6 +277,17 @@ export default {
                 attachment: ''
             };
 
+            let txlease = {
+                type: 8,
+                version: 2,
+                senderPublicKey: '6x8szHwCLYVjKR2N8u4Ux4XLkTUB7nobDNDX1tniH3mp',
+                timestamp: 1563442673094,
+                amount: 100000000,
+                fee: 100000000,
+                recipient: '3MyhVrN18vX7X77AeF8mzL8arJnkicY4GDc',
+                attachment: ''
+            };
+
             if (tx.type == 4 || tx.type == 8) {
                 tx.amount = this.txData.amount;
                 tx.recipient = this.txData.recipient;
@@ -284,30 +296,30 @@ export default {
             if (tx.type == 9) {
                 tx.leaseId = this.txData.leaseId;
             }
-            console.log(tx)
-            const bytes = binary.serializeTx(tx);
-            //console.log("bytes: " + bytes);
+            console.log(txlease)
+            const bytes = binary.serializeTx(txlease);
+            console.log("bytes: " + bytes);
             //console.log("json:" + json.stringifyTx(binary.parseTx(bytes)))
             try {
-                const signature = await this.ledger.signTransaction(this.userId, '', bytes);
-                tx.proofs = [];
-                tx.proofs.push(signature);
+                const signature = await this.ledger.signTransaction(this.userId, '', bytes); //1
+                txlease.proofs = [];
+                txlease.proofs.push(signature);
                 console.log("signature:" + signature);
                 this.$dialog.confirm({
                     title: 'Transaction signed successfully',
-                    message: '<b>Transaction data:</b> <pre>' + JSON.stringify(tx, null, 2) + '</pre>',
+                    message: '<b>Transaction data:</b> <pre>' + JSON.stringify(txlease, null, 2) + '</pre>',
                     cancelText: 'Cancel',
                     confirmText: 'Broadcast transaction',
                     type: 'is-success',
                     onConfirm: async () => {
                         try {
-                            const res = await fetch(`${this.api[this.network]}/transactions/broadcast`, {
+                            const res = await fetch(`${this.api[this.network]}transactions/broadcast`, {
                                 method: 'POST',
                                 headers: {
                                     'Accept': 'application/json',
                                     'Content-Type': 'application/json'
                                 },
-                                body: JSON.stringify(tx)
+                                body: JSON.stringify(txlease)
                             });
                             const content = await res.json();
                             if (content.error) {
