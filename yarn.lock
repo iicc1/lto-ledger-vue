@@ -6015,10 +6015,10 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-lto-ledger-js-unofficial-test@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/lto-ledger-js-unofficial-test/-/lto-ledger-js-unofficial-test-1.0.0.tgz#df5713f3622ac014307f660172fd07176830f026"
-  integrity sha512-AfkVXi3pi/nwvIcfvOXvbjBO3wQJkUBk4T687ETHViK3pUgwO24XaCj6+f1zMucGmmNGNmOatoC8MG+7cU2pVg==
+lto-ledger-js-unofficial-test@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/lto-ledger-js-unofficial-test/-/lto-ledger-js-unofficial-test-1.0.5.tgz#b66fb5c2e59e7445eed01a6c2b28a78a51bbc259"
+  integrity sha512-6xloOi8L87/xzwOsemCeh4MYgSmr0LRWEz4E+PnOE8c73RzaXYs1NQocBWo+pzrsw847Z9o1BE52Zsa1n5/zIQ==
   dependencies:
     "@ledgerhq/hw-transport-u2f" "^4.24.0"
     babel-polyfill "^6.26.0"

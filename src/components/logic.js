@@ -72,8 +72,8 @@ export default {
             // Ledger stuff
             ledgerOptions: {
                 openTimeout: 3000,
-                listenTimeout: 100000,
-                exchangeTimeout: 100000,
+                listenTimeout: 150000,
+                exchangeTimeout: 150000,
                 networkCode: 76, // 76 LTO Network mainnet 84 TESTNET
                 transport: TransportU2F
             },
@@ -205,7 +205,7 @@ export default {
             this.txData.type = Number(type);
         },
         async amountSelection(amount) {
-            this.txData.amount = amount * 10000000;
+            this.txData.amount = amount * 100000000;
         },
         async recipientSelection(recipient) {
             let regex;
@@ -220,7 +220,6 @@ export default {
             } else {
                 this.recipientIsOk = "is-danger";
             }
-            this.address = recipient;
         },
         async feeSelection(fee) {
             this.txData.fee = fee * 100000000;
@@ -279,7 +278,8 @@ export default {
                                 else {
                                     txUrl = `https://explorer.lto.network/}`;
                                 }
-                                this.$dialog.alert(`Transaction broadcasted over the network! You can track it <a href="${txUrl}/transaction/` + content.id + `">here</a>`)
+                                this.$dialog.alert(`Transaction broadcasted over the network! You can track it <a href="${txUrl}/transaction/` + content.id + `">here</a>.
+                                                    Remember to refresh the page if the explorer has not found the transaction yet!`)
                             }
                         } catch (e) {
                             this.$dialog.alert({
