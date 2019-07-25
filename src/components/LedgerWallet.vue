@@ -24,17 +24,16 @@
                     <div class="columns">
                         <div class="column is-half">
                             <span v-if="!isLoading && composedData">
-                            <strong> Total: </strong>
-                            <b-tooltip label="v-model="composedData["composedData"]["usd"].regular.toFixed(2)" $"
-                                position="is-right" size="is-small" type="is-light">
+                            <strong> Total:  &emsp;</strong>
+                            <b-tooltip :label="'$' + composedData['composedData']['usd'].regular.toFixed(2)" position="is-right" size="is-small" type="is-light">
                                 <b-button class="button is-primary" size="is-small">
                                   <strong> {{(composedData["addressData"].regular / 100000000).toFixed(2)}} LTO </strong>
                                 </b-button>
                             </b-tooltip>
                             <br>
                             <br>
-                            <strong> Available: </strong>
-                            <b-tooltip label="v-model="composedData["composedData"]["usd"].available.toFixed(2)" $"
+                            <strong> Available:  &emsp;</strong>
+                            <b-tooltip :label="'$' + composedData['composedData']['usd'].available.toFixed(2)"
                                 position="is-right" size="is-small" type="is-light">
                                 <b-button class="button is-primary" size="is-small">
                                    <strong> {{(composedData["addressData"].available / 100000000).toFixed(2)}} LTO </strong>
