@@ -15,14 +15,14 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-half">
-                    <div class="notification panel text-shadow shadow-effect min-height-140"> 
+                    <div class="notification panel text-shadow shadow-effect min-height-175">
                     <div class="columns">
                         <div class="column is-half">
                         <h4 class="title is-4">Balance</h4>
                         </div>
                     </div>
                     <div class="columns">
-                        <div class="column is-half">
+                        <div class="column is-half ">
                             <span v-if="!isLoading && composedData">
                             <strong> Total:  &emsp;</strong>
                             <b-tooltip :label="'$' + composedData['composedData']['usd'].regular.toFixed(2)" position="is-right" size="is-small" type="is-light">
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="column is-half">
-                    <div class="notification panel text-shadow shadow-effect min-height-140"> 
+                    <div class="notification panel text-shadow shadow-effect min-height-175">
                         <div class="columns">
                             <div class="column is-full">
                                 <h4 class="title is-4">Network Switch</h4>
@@ -171,8 +171,8 @@
     .right {
         text-align: right
     }
-    .min-height-140 {
-        min-height: 140px;
+    .min-height-175 {
+        min-height: 175px;
     }
     .shadow-effect {
         border: 1px solid rgba(65, 37, 150, 0.1);
