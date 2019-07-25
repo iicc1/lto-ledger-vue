@@ -12,7 +12,7 @@ export let longToByteArray = function(long) {
 
 export function prepareBytes(tx) {
     let sData;
-    if (tx.type == 4) {
+    if (tx.type === 4) {
         // type + version + whatever
         let header = new Uint8Array([4,1,4]);
         // public key
@@ -38,7 +38,7 @@ export function prepareBytes(tx) {
         sData.set(recipient, senderPublicKey.length + 3 + 8 + 8 + 8);
         sData.set(attachmentLength, senderPublicKey.length + 3 + 8 + 8 + 8 + recipient.length)
 
-    } else if (tx.type == 8) {
+    } else if (tx.type === 8) {
         // type + version + whatever
         let header = new Uint8Array([8,1,8]);
         // public key
@@ -61,7 +61,7 @@ export function prepareBytes(tx) {
         sData.set(fee, senderPublicKey.length + 3 + recipient.length + 8);
         sData.set(timestamp, senderPublicKey.length + 3 + recipient.length + 8 + 8);
 
-    } else if (tx.type == 9) {
+    } else if (tx.type === 9) {
         // type + version + whatever
         let header = new Uint8Array([9,1,9]);
         // public key

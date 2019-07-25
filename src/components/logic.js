@@ -1,8 +1,6 @@
 import "@babel/polyfill";
 import TransportU2F from '@ledgerhq/hw-transport-u2f';
 import {WavesLedger} from 'lto-ledger-js-unofficial-test';
-import {binary} from '@lto-network/lto-marshall';
-// import "transactions";
 import * as Transactions from './transactions.js'
 
 
@@ -80,7 +78,7 @@ export default {
                 transport: TransportU2F
             },
             ledger : null,
-            userId: 0,
+            userId: 0, // default bip32 path
             publicKey: null,
             ledgerAddressIsOk: null,
             address: null,
@@ -103,7 +101,6 @@ export default {
                 amount: null,
                 fee: null,
                 recipient: null,
-                leaseId: null,  // TODO improve
             }
         }
     },
@@ -205,7 +202,7 @@ export default {
             }
         },
         async transactionTypeSelection(type) {
-            this.txData.type = type;
+            this.txData.type = Number(type);
         },
         async amountSelection(amount) {
             this.txData.amount = amount * 10000000;
@@ -229,20 +226,10 @@ export default {
             this.txData.fee = fee * 100000000;
         },
         async signTransaction() {
-
-            let beforeTx =  {
-                type: 4,
-                version: 2,
-                senderPublicKey: '6x8szHwCLYVjKR2N8u4Ux4XLkTUB7nobDNDX1tniH3mp',
-                timestamp: 1563442673094,
-                amount: 100000000,
-                fee: 100000000,
-                recipient: '3MyhVrN18vX7X77AeF8mzL8arJnkicY4GDc',
-                attachment: ''
-            };
-            let preparedData = Transactions.prepareBytes(beforeTx);
             // Validation
-            if (! this.txData.type || ! this.txData.amount || ! this.txData.recipient || ! this.txData.fee) {
+            let tx = this.txData;
+            tx.senderPublicKey = this.publicKey;
+            if (! tx.type || ! tx.amount || ! tx.recipient || ! tx.fee || ! tx.senderPublicKey) {
                 this.$notification.open({
                     message: `Please fill all fields first!`,
                     position: 'is-bottom-right',
@@ -255,44 +242,13 @@ export default {
             }
             // Start signing
             this.userIsSigning = true;
-            const timestamp = new Date().getTime();
-
-            let tx = {
-                type: Number(this.txData.type),
-                version: 2,
-                senderPublicKey: this.publicKey,
-                timestamp: timestamp,
-                fee: this.txData.fee,
-                attachment: ''
-            };
-
-            let txlease = {
-                type: 8,
-                version: 2,
-                senderPublicKey: '6x8szHwCLYVjKR2N8u4Ux4XLkTUB7nobDNDX1tniH3mp',
-                timestamp: 1563442673094,
-                amount: 100000000,
-                fee: 100000000,
-                recipient: '3MyhVrN18vX7X77AeF8mzL8arJnkicY4GDc',
-                attachment: ''
-            };
-
-            if (tx.type == 4 || tx.type == 8) {
-                tx.amount = this.txData.amount;
-                tx.recipient = this.txData.recipient;
-            }
-
-            if (tx.type == 9) {
-                tx.leaseId = this.txData.leaseId;
-            }
-            const bytes = binary.serializeTx(txlease);
+            tx.timestamp = new Date().getTime();
+            const bytes = Transactions.prepareBytes(tx);
             try {
-                const signature = await this.ledger.signTransaction(this.userId, '', bytes); //1
-                txlease.proofs = [];
-                txlease.proofs.push(signature);
+                tx.signature = await this.ledger.signTransaction(this.userId, '', bytes, 1);
                 this.$dialog.confirm({
                     title: 'Transaction signed successfully',
-                    message: '<b>Transaction data:</b> <pre>' + JSON.stringify(txlease, null, 2) + '</pre>',
+                    message: '<b>Transaction data:</b> <pre>' + JSON.stringify(tx, null, 2) + '</pre>',
                     cancelText: 'Cancel',
                     confirmText: 'Broadcast transaction',
                     type: 'is-success',
@@ -304,7 +260,7 @@ export default {
                                     'Accept': 'application/json',
                                     'Content-Type': 'application/json'
                                 },
-                                body: JSON.stringify(txlease)
+                                body: JSON.stringify(tx)
                             });
                             const content = await res.json();
                             if (content.error) {
