@@ -60,7 +60,7 @@
                                 <h4 class="title is-4">Network Switch</h4>
                             </div>
                         </div>
-
+                        <br>
                         <div class="columns">
                             <div class="column is-half">
                                 <h5 v-if="network == 'Mainnet'" class="title is-5">LTO Functional Network</h5>
