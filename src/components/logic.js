@@ -71,8 +71,8 @@ export default {
             // Ledger stuff
             ledgerOptions: {
                 openTimeout: 3000,
-                listenTimeout: 150000,
-                exchangeTimeout: 150000,
+                listenTimeout: 250000,
+                exchangeTimeout: 250000,
                 networkCode: 76, // 76 LTO Network mainnet 84 TESTNET
                 transport: TransportU2F
             },

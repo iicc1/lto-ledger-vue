@@ -1,6 +1,6 @@
 # lto-ledger-vue
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/9747b4cf-1d96-4576-9408-dc147505ce8a/deploy-status)](https://app.netlify.com/sites/lto-testnet-ledger-beta/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9747b4cf-1d96-4576-9408-dc147505ce8a/deploy-status)](https://app.netlify.com/sites/lto-ledger-beta/deploys)
 
 Community made Vue.js Ledger interface for LTO Network blockchain
 
