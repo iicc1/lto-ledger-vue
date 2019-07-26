@@ -4,23 +4,23 @@ import {WavesLedger} from 'lto-ledger-js-unofficial-test';
 import * as Transactions from './transactions.js'
 
 
-async function getData(address, network, api) {
+async function getData(address, network, api, priceData) {
     let addressData = await getAddressBalance(network, address, api);
     if (addressData.error) {
         return {"error": "Error getting balance data: " + addressData.message};
     }
-    else if (this.priceData.error) {
+    else if (priceData.error) {
         return {"error": "Error getting price data: "};
     }
     else {
         let composedData = {};
-        if (this.priceData.hasOwnProperty("lto-network")) {
-            let keys = Object.keys(this.priceData["lto-network"]);
+        if (priceData.hasOwnProperty("lto-network")) {
+            let keys = Object.keys(priceData["lto-network"]);
             keys.forEach(key => {
                 if (key == 'usd') {
                     composedData[key] = {
-                        "available": (addressData.available * this.priceData["lto-network"][key]) / 100000000,
-                        "regular": (addressData.regular * this.priceData["lto-network"][key]) / 100000000
+                        "available": (addressData.available * priceData["lto-network"][key]) / 100000000,
+                        "regular": (addressData.regular * priceData["lto-network"][key]) / 100000000
                     }
                 }
             });
@@ -129,7 +129,7 @@ export default {
             this.publicKey = userInfo.publicKey;
             this.ledgerAddressIsOk = "is-success";
             this.isLoading = true;
-            let dataGet = await getData(this.address, this.network, this.api);
+            let dataGet = await getData(this.address, this.network, this.api, this.priceData);
             if (dataGet.hasOwnProperty("error")) {
                 this.$notification.open({
                     message: dataGet.error,
@@ -163,7 +163,7 @@ export default {
                 this.publicKey = userInfo.publicKey;
                 this.ledgerAddressIsOk = "is-success";
                 this.isLoading = true;
-                let dataGet = await getData(this.address, this.network, this.api);
+                let dataGet = await getData(this.address, this.network, this.api, this.priceData);
                 if (dataGet.hasOwnProperty("error")) {
                     this.$notification.open({
                         message: dataGet.error,
@@ -199,7 +199,7 @@ export default {
                 this.publicKey = userInfo.publicKey;
                 this.ledgerAddressIsOk = "is-success";
                 this.isLoading = true;
-                let dataGet = await getData(this.address, this.network, this.api);
+                let dataGet = await getData(this.address, this.network, this.api, this.priceData);
                 if (dataGet.hasOwnProperty("error")){
                     this.$notification.open({
                         message: dataGet.error,
