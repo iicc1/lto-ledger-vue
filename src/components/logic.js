@@ -6,22 +6,21 @@ import * as Transactions from './transactions.js'
 
 async function getData(address, network, api) {
     let addressData = await getAddressBalance(network, address, api);
-    let priceData = await getPrice();
     if (addressData.error) {
         return {"error": "Error getting balance data: " + addressData.message};
     }
-    else if (priceData.error) {
-        return {"error": "Error getting price data: " + priceData.message};
+    else if (this.priceData.error) {
+        return {"error": "Error getting price data: "};
     }
     else {
         let composedData = {};
-        if (priceData.hasOwnProperty("lto-network")) {
-            let keys = Object.keys(priceData["lto-network"]);
+        if (this.priceData.hasOwnProperty("lto-network")) {
+            let keys = Object.keys(this.priceData["lto-network"]);
             keys.forEach(key => {
                 if (key == 'usd') {
                     composedData[key] = {
-                        "available": (addressData.available * priceData["lto-network"][key]) / 100000000,
-                        "regular": (addressData.regular * priceData["lto-network"][key]) / 100000000
+                        "available": (addressData.available * this.priceData["lto-network"][key]) / 100000000,
+                        "regular": (addressData.regular * this.priceData["lto-network"][key]) / 100000000
                     }
                 }
             });
@@ -95,6 +94,7 @@ export default {
             composedData: null,
             isLoading: true,
             addressData: null,
+            priceData: null,
             // Transaction data
             txData: {
                 type: null,
@@ -105,6 +105,21 @@ export default {
         }
     },
     mounted: async function () {
+        // gets price data from coingecko and saves it for later use
+        const priceData = await getPrice();
+        if (priceData.hasOwnProperty("error")) {
+            this.$notification.open({
+                message: "Error getting price data",
+                position: 'is-bottom-right',
+                duration: 20000,
+                type: 'is-danger',
+                hasIcon: true,
+                queue: false
+            })
+        }
+        else {
+            this.priceData = priceData;
+        }
         // Creates a new default ledger instance
         this.ledger = new WavesLedger(this.ledgerOptions);
         // Tries to connect and fetches the first wallet
