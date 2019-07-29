@@ -101,8 +101,8 @@
                         <b-select placeholder="Select a type" size="is-medium" @input="transactionTypeSelection">
                             <option value=4>Transfer</option>
                             <option value=8>Start Lease</option>
-                            <option value=9 disabled>Cancel Lease</option>
-                            <option value=15 disabled>Anchor</option>
+                            <option value=9>Cancel Lease</option>
+                            <option value=15>Anchor</option>
                             <option value=11 disabled>Mass Transfer</option>
                         </b-select>
                     </b-field>

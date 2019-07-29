@@ -96,12 +96,7 @@ export default {
             addressData: null,
             priceData: null,
             // Transaction data
-            txData: {
-                type: null,
-                amount: null,
-                fee: null,
-                recipient: null,
-            }
+            txData: { }
         }
     },
     mounted: async function () {
@@ -223,17 +218,23 @@ export default {
             this.txData.amount = amount * 100000000;
         },
         async recipientSelection(recipient) {
-            let regex;
-            if (this.network == 'Mainnet') {
-                regex = /^(3[jJ]\w{33})$/;
+            if (this.txData.type === 9){
+                this.txData.leaseId = recipient;
+            } else if (this.txData.type === 15){
+                this.txData.anchor = recipient;
             } else {
-                regex = /^(3[mM]\w{33})$/;
-            }
-            if (regex.test(recipient)) {
-                this.txData.recipient = recipient;
-                this.recipientIsOk = "is-success";
-            } else {
-                this.recipientIsOk = "is-danger";
+                let regex;
+                if (this.network == 'Mainnet') {
+                    regex = /^(3[jJ]\w{33})$/;
+                } else {
+                    regex = /^(3[mM]\w{33})$/;
+                }
+                if (regex.test(recipient)) {
+                    this.txData.recipient = recipient;
+                    this.recipientIsOk = "is-success";
+                } else {
+                    this.recipientIsOk = "is-danger";
+                }
             }
         },
         async feeSelection(fee) {
@@ -243,7 +244,7 @@ export default {
             // Validation
             let tx = this.txData;
             tx.senderPublicKey = this.publicKey;
-            if (! tx.type || ! tx.amount || ! tx.recipient || ! tx.fee || ! tx.senderPublicKey) {
+            if (! tx.type || ! tx.fee || ! tx.senderPublicKey || (tx.type && (tx.type === 4 || tx.type === 8) && ! tx.amount)) {
                 this.$notification.open({
                     message: `Please fill all fields first!`,
                     position: 'is-bottom-right',

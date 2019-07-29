@@ -70,16 +70,34 @@ export function prepareBytes(tx) {
         let fee = longToByteArray(tx.fee).reverse();
         // timestamp
         let timestamp = longToByteArray(tx.timestamp).reverse();
-        // Lease Id!!
-        let recipient = Base58.decode(tx.recipient);
+        // Lease Id to cancel
+        let leaseId = Base58.decode(tx.leaseId);
 
         // Build transaction
-        sData = new Uint8Array(3 + senderPublicKey.length + recipient.length + 24);
+        sData = new Uint8Array(3 + senderPublicKey.length + 8 + 8 + leaseId.length);
         sData.set(header);
         sData.set(senderPublicKey, 3);
         sData.set(fee, 3 + senderPublicKey.length);
         sData.set(timestamp, 3 + senderPublicKey.length + 8);
-        sData.set(recipient, 3 + senderPublicKey.length + 8 + 8);
+        sData.set(leaseId, 3 + senderPublicKey.length + 8 + 8);
+    } else if (tx.type === 15) {
+        // type + version + whatever
+        let header = new Uint8Array([15,1,15]);
+        // public key
+        let senderPublicKey = Base58.decode(tx.senderPublicKey);
+        // anchor
+        let anchor = Base58.decode(tx.anchor);
+        // timestamp
+        let timestamp = longToByteArray(tx.timestamp).reverse();
+        // fee
+        let fee = longToByteArray(tx.fee).reverse();
+
+        sData = new Uint8Array(3 + senderPublicKey.length + anchor.length + 16);
+        sData.set(header);
+        sData.set(senderPublicKey, 3);
+        sData.set(anchor, 3 + senderPublicKey.length);
+        sData.set(timestamp, 3 + senderPublicKey.length + anchor.length);
+        sData.set(fee, 3 + senderPublicKey.length + anchor.length + 8);
     }
 
     return sData;
