@@ -134,7 +134,7 @@
                 <br><br>
                 Price data by <a href="https://www.coingecko.com">Coingecko</a>
                 <br><br>
-                Do you need help? Join <a href="https://t.me/ltonetwork/">LTO Network Tech chat</a>
+                Do you need help? Join <a href="https://t.me/joinchat/BrVdbEUBdYOXu4N8mY9wEQ">LTO Network Tech chat</a>
                 <br><br>
                 <iframe class="iframe-custom" src="https://ghbtns.com/github-btn.html?user=iicc1&repo=lto-ledger-vue&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
             </div>
@@ -176,17 +176,20 @@
         min-height: 175px;
     }
     .shadow-effect {
-        border: 1px solid rgba(65, 37, 150, 0.1);
-        box-shadow: 0px 0px 45px 0px rgba(65, 37, 150, 0.18);
+        border: 1px solid rgba(65, 37, 150, 0.09);
+        box-shadow: 0px 0px 45px 0px rgba(65, 37, 150, 0.12);
+        border-radius: 9px 9px 9px 9px;
+        -moz-border-radius: 9px 9px 9px 9px;
+        -webkit-border-radius: 9px 9px 9px 9px;
     }
 
     .shadow-effect:hover, .shadow-effect:focus, .shadow-effect:active {
         border: 1px solid rgba(65, 37, 150, 0.1);
-        box-shadow: 0px 0px 55px 0px rgba(65, 37, 150, 0.25);
+        box-shadow: 0px 0px 55px 0px rgba(65, 37, 150, 0.16);
     }
 
     .text-shadow:hover, .text-shadow:focus, .text-shadow:active {
-        text-shadow: 0 0 25px rgba(65, 37, 150, 0.35);
+        text-shadow: 0 0 25px rgba(65, 37, 150, 0.3);
     }
     .iframe-custom{
         height: 35px !important;

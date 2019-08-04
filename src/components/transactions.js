@@ -1,6 +1,6 @@
 let Base58 = require("base-58");
 
-export let longToByteArray = function(long) {
+let longToByteArray = function(long) {
     const byteArray = [0, 0, 0, 0, 0, 0, 0, 0];
     for (let index = 0; index < byteArray.length; index ++ ) {
         const byte = long & 0xff;
@@ -10,10 +10,21 @@ export let longToByteArray = function(long) {
     return byteArray;
 };
 
+// eslint-disable-next-line no-unused-vars
+let shortToByteArray = function(short) {
+    const byteArray = [0, 0];
+    for (let index = 0; index < byteArray.length; index ++ ) {
+        const byte = short & 0xff;
+        byteArray [ index ] = byte;
+        short = (short - byte) / 256 ;
+    }
+    return byteArray;
+};
+
 export function prepareBytes(tx) {
     let sData;
     if (tx.type === 4) {
-        // type + version + whatever
+        // type + version + type
         let header = new Uint8Array([4,1,4]);
         // public key
         let senderPublicKey = Base58.decode(tx.senderPublicKey);
@@ -39,7 +50,7 @@ export function prepareBytes(tx) {
         sData.set(attachmentLength, senderPublicKey.length + 3 + 8 + 8 + 8 + recipient.length)
 
     } else if (tx.type === 8) {
-        // type + version + whatever
+        // type + version + type
         let header = new Uint8Array([8,1,8]);
         // public key
         let senderPublicKey = Base58.decode(tx.senderPublicKey);
@@ -62,7 +73,7 @@ export function prepareBytes(tx) {
         sData.set(timestamp, senderPublicKey.length + 3 + recipient.length + 8 + 8);
 
     } else if (tx.type === 9) {
-        // type + version + whatever
+        // type + version + type
         let header = new Uint8Array([9,1,9]);
         // public key
         let senderPublicKey = Base58.decode(tx.senderPublicKey);
@@ -85,6 +96,13 @@ export function prepareBytes(tx) {
         let header = new Uint8Array([15,1,15]);
         // public key
         let senderPublicKey = Base58.decode(tx.senderPublicKey);
+        // number of anchors
+        // TODO: multianchoring
+        let anchorNum = new Uint8Array([0,1]);
+        // anchor length
+        // let anchorLength = shortToByteArray(tx.anchor.length).reverse();
+        // why is length 32 and not 44?
+        let anchorLength = new Uint8Array([0,32]);
         // anchor
         let anchor = Base58.decode(tx.anchor);
         // timestamp
@@ -92,12 +110,14 @@ export function prepareBytes(tx) {
         // fee
         let fee = longToByteArray(tx.fee).reverse();
 
-        sData = new Uint8Array(3 + senderPublicKey.length + anchor.length + 16);
+        sData = new Uint8Array(3 + senderPublicKey.length + 2 + 2 + anchor.length + 16);
         sData.set(header);
         sData.set(senderPublicKey, 3);
-        sData.set(anchor, 3 + senderPublicKey.length);
-        sData.set(timestamp, 3 + senderPublicKey.length + anchor.length);
-        sData.set(fee, 3 + senderPublicKey.length + anchor.length + 8);
+        sData.set(anchorNum, 3 + senderPublicKey.length);
+        sData.set(anchorLength, 3 + senderPublicKey.length + 2);
+        sData.set(anchor, 3 + senderPublicKey.length + 2 + 2);
+        sData.set(timestamp, 3 + senderPublicKey.length + 2 + 2 + anchor.length);
+        sData.set(fee, 3 + senderPublicKey.length + 2 + 2 + anchor.length + 8);
     }
 
     return sData;
