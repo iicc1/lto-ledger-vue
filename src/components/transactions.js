@@ -92,8 +92,8 @@ export function prepareBytes(tx) {
         sData.set(timestamp, 3 + senderPublicKey.length + 8);
         sData.set(leaseId, 3 + senderPublicKey.length + 8 + 8);
     } else if (tx.type === 15) {
-        // type + version + whatever
-        let header = new Uint8Array([15,1,15]);
+        // type + version + type + version
+        let header = new Uint8Array([15,1,15,1]);
         // public key
         let senderPublicKey = Base58.decode(tx.senderPublicKey);
         // number of anchors
@@ -110,14 +110,14 @@ export function prepareBytes(tx) {
         // fee
         let fee = longToByteArray(tx.fee).reverse();
 
-        sData = new Uint8Array(3 + senderPublicKey.length + 2 + 2 + anchor.length + 16);
+        sData = new Uint8Array(4 + senderPublicKey.length + 2 + 2 + anchor.length + 16);
         sData.set(header);
-        sData.set(senderPublicKey, 3);
-        sData.set(anchorNum, 3 + senderPublicKey.length);
-        sData.set(anchorLength, 3 + senderPublicKey.length + 2);
-        sData.set(anchor, 3 + senderPublicKey.length + 2 + 2);
-        sData.set(timestamp, 3 + senderPublicKey.length + 2 + 2 + anchor.length);
-        sData.set(fee, 3 + senderPublicKey.length + 2 + 2 + anchor.length + 8);
+        sData.set(senderPublicKey, 4);
+        sData.set(anchorNum, 4 + senderPublicKey.length);
+        sData.set(anchorLength, 4 + senderPublicKey.length + 2);
+        sData.set(anchor, 4 + senderPublicKey.length + 2 + 2);
+        sData.set(timestamp, 4 + senderPublicKey.length + 2 + 2 + anchor.length);
+        sData.set(fee, 4 + senderPublicKey.length + 2 + 2 + anchor.length + 8);
     }
 
     return sData;
