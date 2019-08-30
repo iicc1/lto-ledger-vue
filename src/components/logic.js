@@ -227,7 +227,7 @@ export default {
                 if (this.network == 'Mainnet') {
                     regex = /^(3[jJ]\w{33})$/;
                 } else {
-                    regex = /^(3[mM]\w{33})$/;
+                    regex = /^(3[mMnN]\w{33})$/;
                 }
                 if (regex.test(recipient)) {
                     this.txData.recipient = recipient;
