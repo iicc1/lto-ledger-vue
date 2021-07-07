@@ -289,10 +289,10 @@ export default {
                             } else {
                                 let txUrl;
                                 if (this.network.toLowerCase() != "mainnet") {
-                                    txUrl = `https://testnet-explorer.lto.network/`;
+                                    txUrl = `https://testnet-explorer.lto.network`;
                                 }
                                 else {
-                                    txUrl = `https://explorer.lto.network/}`;
+                                    txUrl = `https://explorer.lto.network`;
                                 }
                                 this.$dialog.alert(`Transaction broadcasted over the network! You can track it <a href="${txUrl}/transaction/` + content.id + `">here</a>.
                                                     Remember to refresh the page if the explorer has not found the transaction yet!`)
