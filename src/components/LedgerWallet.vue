@@ -63,8 +63,8 @@
                         <br>
                         <div class="columns">
                             <div class="column is-half">
-                                <h5 v-if="network == 'Mainnet'" class="title is-5">LTO Functional Network</h5>
-                                <h5 v-else  class="title is-5">LTO Testing Environment</h5>
+                                <h5 v-if="network == 'Mainnet'" class="title is-5">LTO Mainnet</h5>
+                                <h5 v-else  class="title is-5">LTO Testnet</h5>
                             </div>
 
                             <div class="column is-half">
@@ -146,14 +146,14 @@
 
 <style scoped >
     .main{
-        background-color: #F9FAFF;
+        background-color: #ffffff;
         height: 100%;
     }
     .hero-title{
         background-color: #7E95EF;
     }
     .panel{
-        background-color: #F5F5F5;
+        background-color: #ffffff;
         margin-top: 40px;
     }
     .footer{
@@ -166,9 +166,6 @@
         left: 0px;
         right: 0px;
     }
-    .text-shadow {
-        text-shadow: 0 0 10px rgba(65, 37, 150, 0.25);
-    }
     .right {
         text-align: right
     }
@@ -176,21 +173,18 @@
         min-height: 175px;
     }
     .shadow-effect {
-        border: 1px solid rgba(65, 37, 150, 0.09);
-        box-shadow: 0px 0px 45px 0px rgba(65, 37, 150, 0.12);
+        border: 1px solid rgba(87, 66, 150, 0.09);
+        box-shadow: 0px 0px 45px 0px rgba(99, 99, 151, 0.12);
         border-radius: 9px 9px 9px 9px;
         -moz-border-radius: 9px 9px 9px 9px;
         -webkit-border-radius: 9px 9px 9px 9px;
     }
 
     .shadow-effect:hover, .shadow-effect:focus, .shadow-effect:active {
-        border: 1px solid rgba(65, 37, 150, 0.1);
-        box-shadow: 0px 0px 55px 0px rgba(65, 37, 150, 0.16);
+        border: 1px solid rgba(101, 90, 138, 0.1);
+        box-shadow: 0px 0px 55px 0px rgba(98, 89, 124, 0.16);
     }
 
-    .text-shadow:hover, .text-shadow:focus, .text-shadow:active {
-        text-shadow: 0 0 25px rgba(65, 37, 150, 0.3);
-    }
     .iframe-custom{
         height: 35px !important;
     }
